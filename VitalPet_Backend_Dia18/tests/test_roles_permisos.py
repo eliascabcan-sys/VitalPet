@@ -204,6 +204,7 @@ PUBLICAS = {
     ("POST", "/auth/recuperar-contrasena"), ("POST", "/auth/restablecer-contrasena"),
     ("GET", "/auth/google/login"), ("GET", "/auth/google/callback"),
     ("GET", "/certificados/verificar/{codigo}"),   # verificación pública de certificados
+    ("GET", "/mascotas/foto/{nombre}"),            # foto servida a <img>, que no puede mandar token
 }
 
 
