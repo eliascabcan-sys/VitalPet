@@ -1,0 +1,48 @@
+/* Editor de la fórmula: filas de medicamentos + aviso de stock */
+.fe-fila {
+  border: 1.5px solid rgba(0, 0, 0, 0.08); border-radius: 12px;
+  padding: 12px 12px 2px; margin-bottom: 12px; background: #fcfdfd;
+}
+.fe-fila-cabecera {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: var(--color-nav); margin-bottom: 8px;
+}
+.fe-quitar {
+  background: none; border: none; cursor: pointer; font-family: var(--fuente);
+  font-size: 12.5px; font-weight: 600; color: var(--nivel-rojo-texto);
+  padding: 6px 8px; border-radius: var(--radio-boton); min-height: var(--tap-min);
+}
+.fe-quitar:hover { background: var(--nivel-rojo-fondo); }
+.fe-agregar {
+  background: #fff; border: 1.5px dashed var(--color-primario); color: var(--color-primario-fuerte);
+  border-radius: var(--radio-boton); padding: 9px 14px; font-size: 13.5px; font-weight: 600;
+  font-family: var(--fuente); cursor: pointer; min-height: var(--tap-min); width: 100%;
+}
+.fe-agregar:hover { background: var(--color-fondo); }
+
+/* Autocompletar */
+.fe-autocompletar { position: relative; }
+.fe-sugerencias {
+  position: absolute; z-index: 20; left: 0; right: 0; top: 100%; margin: 2px 0 0; padding: 4px;
+  list-style: none; background: #fff; border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px; box-shadow: var(--sombra-fuerte); max-height: 220px; overflow-y: auto;
+}
+.fe-sugerencias button {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: none; border: none; text-align: left; cursor: pointer; font-family: var(--fuente);
+  font-size: 13.5px; padding: 9px 10px; border-radius: 8px; color: var(--color-texto);
+  min-height: var(--tap-min);
+}
+.fe-sugerencias button:hover { background: var(--color-fondo); }
+
+/* Stock */
+.fe-stock-bloque { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 6px; }
+.fe-stock {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+.fe-stock.ok     { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.fe-stock.bajo   { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.fe-stock.agotado { background: var(--nivel-rojo-fondo);   color: var(--nivel-rojo-texto); }
+.fe-tipo { font-size: 12px; color: var(--color-texto-suave); }
+.fe-ayuda { display: block; margin-top: 5px; font-size: 12px; color: var(--color-texto-suave); }

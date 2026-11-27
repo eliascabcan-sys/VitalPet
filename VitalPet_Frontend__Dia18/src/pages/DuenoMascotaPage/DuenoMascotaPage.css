@@ -1,0 +1,26 @@
+/* =================================================================
+   Carpeta de una mascota (dueño). Reutiliza el encabezado, los datos
+   clave, las pestañas y las tarjetas de FichaCarpeta.css (prefijo "fc-");
+   aquí solo va lo propio del dueño (prefijo "dm-").
+================================================================= */
+.dm-acciones { display: flex; flex-wrap: wrap; gap: 8px; flex-shrink: 0; }
+.dm-btn {
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; min-height: 40px;
+  border-radius: var(--radio-boton); font-family: var(--fuente); font-size: 14px; font-weight: 700;
+  text-decoration: none; cursor: pointer; border: 1.5px solid var(--color-primario-fuerte);
+  background: #fff; color: var(--color-primario-fuerte); transition: var(--transicion);
+}
+.dm-btn:hover { background: var(--color-fondo); }
+.dm-btn.primario { background: var(--color-primario-fuerte); color: #fff; }
+.dm-btn.primario:hover { filter: brightness(1.1); }
+
+.dm-cita { margin: 0 0 6px; font-size: 15px; }
+.dm-cita strong { text-transform: capitalize; }
+.dm-detalle { margin: 0 0 12px; font-size: 13.5px; color: var(--color-texto-suave); }
+.dm-contenido { margin-top: 4px; }
+.dm-bloque-titulo { font-size: 16px; font-weight: 700; color: var(--color-nav); margin: 0 0 10px; }
+
+@media (max-width: 640px) {
+  .dm-acciones { width: 100%; }
+  .dm-btn { flex: 1; justify-content: center; }
+}

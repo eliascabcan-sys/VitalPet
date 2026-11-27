@@ -1,0 +1,228 @@
+/* =================================================================
+   Agenda del veterinario / administrador.
+   Todo usa el prefijo "av-" para no pisar los estilos de otras pantallas.
+   Colores y radios salen de los tokens de variables.css.
+================================================================= */
+
+/* ---------- Controles superiores ---------- */
+.av-controles {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px;
+}
+.av-grupo { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.av-segmentado {
+  display: inline-flex; background: #fff; padding: 3px;
+  border: 1.5px solid rgba(0, 0, 0, 0.12); border-radius: 10px;
+}
+.av-segmentado button {
+  border: none; background: transparent; cursor: pointer;
+  padding: 7px 16px; min-height: 34px; border-radius: 7px;
+  font-family: var(--fuente); font-size: 13px; font-weight: 600; color: var(--color-texto-suave);
+  transition: var(--transicion);
+}
+.av-segmentado button:hover { background: var(--color-fondo); }
+.av-segmentado button.activo { background: var(--color-nav); color: #fff; }
+
+.av-nav { display: inline-flex; align-items: center; gap: 6px; }
+.av-nav-btn {
+  width: 34px; height: 34px; border-radius: var(--radio-boton); cursor: pointer;
+  border: 1.5px solid rgba(0, 0, 0, 0.12); background: #fff; color: var(--color-texto-suave);
+  font-size: 20px; line-height: 1; display: flex; align-items: center; justify-content: center;
+  transition: var(--transicion);
+}
+.av-nav-btn:hover { background: var(--color-fondo); border-color: var(--color-primario); }
+
+.av-fecha {
+  position: relative; border: none; background: none; cursor: pointer;
+  font-family: var(--fuente); font-size: 16px; font-weight: 700; color: var(--color-nav);
+  padding: 4px 8px; border-radius: var(--radio-boton);
+}
+.av-fecha:hover { background: var(--color-fondo); }
+.av-fecha input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.av-hoy {
+  border: 1.5px solid var(--color-primario); background: #fff; color: var(--color-primario-fuerte);
+  border-radius: var(--radio-boton); padding: 6px 14px; min-height: 34px; cursor: pointer;
+  font-family: var(--fuente); font-size: 13px; font-weight: 700;
+}
+.av-hoy:disabled { opacity: 0.45; cursor: default; }
+
+select.av-vet {
+  padding: 8px 12px; min-height: 36px; font-size: 13px; font-family: var(--fuente);
+  border: 1.5px solid rgba(0, 0, 0, 0.12); border-radius: var(--radio-boton);
+  background: #fff; color: var(--color-texto);
+}
+
+/* ---------- Resumen ---------- */
+.av-resumen { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.av-dato {
+  font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px;
+  background: #fff; border: 1px solid rgba(0, 0, 0, 0.08); color: var(--color-texto-suave);
+}
+.av-dato b { color: var(--color-texto); }
+.av-dato.alerta { background: var(--nivel-naranja-fondo); border-color: transparent; color: var(--nivel-naranja-texto); }
+.av-dato.alerta b { color: var(--nivel-naranja-texto); }
+
+/* ---------- Distribución: agenda a la izquierda, "por asignar" a la derecha ---------- */
+.av-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+@media (max-width: 1180px) { .av-layout { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Detalle de un día ---------- */
+.av-dia { display: flex; flex-direction: column; gap: 14px; }
+
+.av-franja {
+  background: #fff; border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radio-tarjeta); box-shadow: var(--sombra-suave); padding: 16px 18px;
+}
+.av-franja-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.av-franja-nombre { font-size: 16px; font-weight: 700; color: var(--color-nav); }
+.av-franja-horas { font-size: 13px; color: var(--color-texto-suave); }
+.av-franja-cupos { font-size: 13px; color: var(--color-texto-suave); }
+.av-franja-cupos strong { color: var(--color-texto); }
+
+.av-barra { height: 8px; background: #e3e8ec; border-radius: 8px; margin: 8px 0 12px; overflow: hidden; }
+.av-barra i, .av-mini-barra i { display: block; height: 100%; border-radius: inherit; }
+.av-barra i.libre, .av-mini-barra i.libre { background: var(--color-primario); }
+.av-barra i.alto,  .av-mini-barra i.alto  { background: var(--nivel-amarillo); }
+.av-barra i.lleno, .av-mini-barra i.lleno { background: var(--nivel-rojo); }
+
+.av-nota { font-size: 12px; color: var(--color-texto-suave); margin: -4px 0 10px; }
+.av-vacio { font-size: 13px; color: var(--color-texto-gris); margin: 4px 0 0; }
+.av-citas { display: flex; flex-direction: column; gap: 8px; }
+
+.av-cerrado {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: #fff; border: 1px dashed rgba(0, 0, 0, 0.15); border-radius: var(--radio-tarjeta);
+  padding: 28px 16px; color: var(--color-texto-suave); font-size: 14px;
+}
+
+/* ---------- Una cita ---------- */
+.av-cita {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 12px 10px 14px; border-radius: 12px; background: var(--color-fondo);
+  border-left: 4px solid var(--nivel-azul);
+}
+.av-cita.pendiente  { border-left-color: #f97316; }
+.av-cita.confirmada { border-left-color: var(--nivel-azul); }
+.av-cita.completada { border-left-color: var(--nivel-verde); }
+.av-cita.cancelada  { border-left-color: #b4b2a9; opacity: 0.75; }
+
+.av-cita-cuerpo { min-width: 0; flex: 1; }
+.av-cita-nombre { font-size: 14px; font-weight: 700; color: var(--color-texto); }
+.av-cita-especie { font-weight: 500; color: var(--color-texto-suave); }
+.av-cita-detalle { font-size: 12.5px; color: var(--color-texto-suave); margin-top: 2px; }
+.av-cita-acciones { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.av-urgente {
+  margin-left: 8px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  padding: 2px 8px; border-radius: 20px; background: var(--nivel-rojo-fondo); color: var(--nivel-rojo-texto);
+}
+
+/* ---------- Botones pequeños ---------- */
+.av-btn {
+  border: 1.5px solid rgba(0, 0, 0, 0.14); background: #fff; color: var(--color-texto-suave);
+  border-radius: var(--radio-boton); padding: 6px 12px; min-height: 32px; cursor: pointer;
+  font-family: var(--fuente); font-size: 12.5px; font-weight: 600; white-space: nowrap;
+  transition: var(--transicion);
+}
+.av-btn:hover { border-color: var(--color-primario); color: var(--color-primario-fuerte); }
+.av-btn.primario { background: var(--color-primario-fuerte); border-color: var(--color-primario-fuerte); color: #fff; }
+.av-btn.primario:hover { filter: brightness(1.1); color: #fff; }
+
+/* ---------- Vista semana: tablero día x franja ---------- */
+.av-semana { background: #fff; border-radius: var(--radio-tarjeta); box-shadow: var(--sombra-suave); overflow: hidden; }
+.av-semana-fila { display: grid; align-items: stretch; border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+.av-semana-fila:last-child { border-bottom: none; }
+.av-semana-enc { background: var(--color-fondo); }
+.av-semana-col { padding: 10px 12px; font-size: 13px; font-weight: 700; color: var(--color-nav); }
+.av-semana-col span { font-weight: 500; color: var(--color-texto-suave); font-size: 12px; }
+
+.av-semana-dia { cursor: pointer; transition: var(--transicion); }
+.av-semana-dia:hover { background: rgba(42, 143, 163, 0.05); }
+.av-semana-dia.hoy { background: rgba(26, 111, 168, 0.07); }
+.av-semana-dia.cerrado { background: #f3f5f6; cursor: default; color: var(--color-texto-gris); }
+
+.av-semana-etq { padding: 10px 8px 10px 12px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.av-semana-etq button {
+  border: none; background: none; cursor: pointer; padding: 0; text-align: left; font-family: var(--fuente);
+  display: flex; flex-direction: column; line-height: 1.1;
+}
+.av-dia-nombre { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-texto-suave); }
+.av-dia-num { font-size: 22px; font-weight: 700; color: var(--color-nav); }
+.av-semana-dia.hoy .av-dia-num {
+  background: var(--color-nav); color: #fff; border-radius: 999px; padding: 0 9px; align-self: flex-start;
+}
+.av-semana-etq small { font-size: 11px; color: var(--color-texto-gris); }
+.av-por-asignar {
+  font-weight: 700; color: #fff !important; background: var(--color-acento-fuerte);
+  border-radius: 999px; padding: 1px 8px; font-size: 10.5px !important; white-space: nowrap;
+}
+
+.av-celda { padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.av-celda.vacia { color: var(--color-texto-gris); align-items: center; justify-content: center; }
+.av-celda-cab { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--color-texto-suave); }
+.av-mini-barra { flex: 1; max-width: 70px; height: 5px; background: #e3e8ec; border-radius: 5px; overflow: hidden; }
+
+.av-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.av-pill {
+  font-size: 11.5px; font-weight: 600; padding: 2px 9px; border-radius: 20px; max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  background: var(--nivel-azul-fondo); color: var(--nivel-azul-texto);
+}
+.av-pill.pendiente  { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.av-pill.completada { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.av-pill.cancelada  { background: rgba(180, 178, 169, 0.25);  color: #555; text-decoration: line-through; }
+.av-pill.mas { background: #fff; border: 1px solid rgba(0, 0, 0, 0.12); color: var(--color-texto-suave); }
+
+/* ---------- Mes ---------- */
+.av-mes-titulo {
+  font-size: 17px; font-weight: 700; color: var(--color-nav); margin: 0 0 10px;
+}
+.av-dia-elegido { font-size: 15px; font-weight: 700; color: var(--color-nav); margin: 4px 0 10px; }
+
+/* ---------- Panel "por asignar" ---------- */
+.av-panel {
+  background: #fff; border: 1px solid rgba(0, 0, 0, 0.06); border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-suave); padding: 16px; position: sticky; top: 16px;
+}
+@media (max-width: 1180px) { .av-panel { position: static; } }
+.av-panel-cab {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 15px; font-weight: 700; color: var(--color-nav); margin-bottom: 12px;
+}
+.av-contador {
+  min-width: 26px; text-align: center; font-size: 12px; font-weight: 700; padding: 2px 9px;
+  border-radius: 20px; background: #e3e8ec; color: var(--color-texto-suave);
+}
+.av-contador.hay { background: var(--color-acento-fuerte); color: #fff; }
+.av-panel-lista { display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 190px); overflow-y: auto; }
+.av-panel-vacio { display: flex; align-items: center; gap: 6px; }
+
+.av-pa-item {
+  padding: 10px 12px; border-radius: 12px; background: #fff7ed;
+  border: 1px dashed var(--nivel-naranja);
+}
+.av-pa-cuando { font-size: 12px; font-weight: 600; color: var(--nivel-naranja-texto); margin-top: 4px; }
+.av-pa-botones { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  .av-controles, .av-grupo { width: 100%; }
+  .av-segmentado { width: 100%; }
+  .av-segmentado button { flex: 1; }
+  .av-cita { flex-direction: column; align-items: flex-start; }
+  .av-cita-acciones { width: 100%; justify-content: space-between; }
+  .av-semana-fila { grid-template-columns: 64px repeat(2, minmax(0, 1fr)) !important; }
+  .av-celda, .av-semana-col { padding: 8px 6px; }
+}
+
+/* Casillas de cupos de una franja (vista Día): pintada = cupo ocupado */
+.av-cupos { display: flex; gap: 6px; margin: 8px 0 6px; }
+.av-cupos i { flex: 1; height: 14px; border-radius: 6px; background: #e3e8ec; }
+.av-cupos i.ocupado.libre { background: var(--color-primario); }
+.av-cupos i.ocupado.alto  { background: var(--nivel-amarillo); }
+.av-cupos i.ocupado.lleno { background: var(--nivel-rojo); }
+.av-cupos i.ocupado.pendiente { background: #f97316; }
+.av-cupos i.ocupado.asignada  { background: var(--nivel-azul); }
+.av-ocupados { margin: 0 0 10px; font-size: 12.5px; font-weight: 600; color: var(--color-texto-suave); }

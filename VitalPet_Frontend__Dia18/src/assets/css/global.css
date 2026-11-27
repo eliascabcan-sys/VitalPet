@@ -1,0 +1,18 @@
+/* =================================================================
+   Archivo: src/assets/css/global.css
+   Reset base (las variables viven en tokens.css)
+   Se importa en main.tsx después de tokens.css.
+================================================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  font-size: 14px;
+}

@@ -1,0 +1,80 @@
+/* =================================================================
+   Archivo: src/assets/css/tabla-tarjetas.css
+   RESPONSABILIDAD: En pantallas angostas, una tabla .adm-tabla con la
+   clase extra "tarjetas" se muestra como una pila de tarjetas.
+   Cada <td> necesita data-label="Nombre de la columna" (excepto la
+   primera celda, que hace de título, y la última, que son las acciones).
+================================================================= */
+@media (max-width: 640px) {
+  .adm-tabla-wrap:has(> .adm-tabla.tarjetas) {
+    background: none;
+    border: none;
+    overflow: visible;
+  }
+
+  .adm-tabla.tarjetas,
+  .adm-tabla.tarjetas tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* El encabezado se oculta visualmente pero sigue disponible para lectores de pantalla */
+  .adm-tabla.tarjetas thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .adm-tabla.tarjetas tr {
+    display: block;
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: var(--radio-tarjeta);
+    padding: 12px 14px;
+  }
+
+  .adm-tabla.tarjetas td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0;
+    border-bottom: none;
+    text-align: right;
+  }
+
+  .adm-tabla.tarjetas td::before {
+    content: attr(data-label);
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-texto-suave);
+    text-align: left;
+  }
+
+  /* Primera celda = título de la tarjeta */
+  .adm-tabla.tarjetas td:first-child {
+    display: block;
+    text-align: left;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  /* Última celda = acciones */
+  .adm-tabla.tarjetas td:last-child {
+    justify-content: flex-end;
+    padding-top: 10px;
+    margin-top: 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .adm-tabla.tarjetas td:last-child::before { content: none; }
+
+  .adm-tabla.tarjetas tr.inactiva td { opacity: 0.55; }
+  .adm-tabla.tarjetas tr.inactiva td:last-child { opacity: 1; }
+}

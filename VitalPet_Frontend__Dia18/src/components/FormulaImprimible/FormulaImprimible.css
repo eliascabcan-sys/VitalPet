@@ -1,0 +1,48 @@
+/* Hoja de la fórmula: invisible en pantalla, única cosa visible al imprimir. */
+.fi-hoja { display: none; }
+
+.fi-boton {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+  min-height: 40px; padding: 8px 14px; border-radius: var(--radio-boton, 8px);
+  border: 1px solid var(--color-nav, #1A6FA8); background: #fff; color: var(--color-nav, #1A6FA8);
+  font: 600 14px var(--fuente, inherit); cursor: pointer;
+}
+.fi-boton:hover { background: var(--color-nav, #1A6FA8); color: #fff; }
+
+@media print {
+  @page { size: A4; margin: 16mm; }
+
+  /* Solo se muestra la hoja de la fórmula; el resto de la app desaparece. */
+  body.imprimiendo-formula > *:not(.fi-hoja) { display: none !important; }
+  body.imprimiendo-formula { background: #fff !important; }
+  body.imprimiendo-formula .fi-hoja { display: block; }
+  .no-print { display: none !important; }
+
+  .fi-hoja {
+    font-family: 'Times New Roman', Georgia, serif; color: #000; font-size: 12.5pt; line-height: 1.4;
+  }
+  .fi-cabecera {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16pt;
+    border-bottom: 2pt solid #000; padding-bottom: 8pt; margin-bottom: 12pt;
+  }
+  .fi-clinica { font-size: 17pt; font-weight: 700; }
+  .fi-contacto { font-size: 10pt; color: #333; }
+  .fi-numero { text-align: right; display: flex; flex-direction: column; font-size: 11pt; }
+  .fi-numero strong { font-size: 15pt; text-transform: uppercase; letter-spacing: .04em; }
+
+  .fi-tabla { width: 100%; border-collapse: collapse; margin-bottom: 10pt; }
+  .fi-tabla th, .fi-tabla td { border: 1pt solid #000; padding: 4pt 6pt; text-align: left; vertical-align: top; }
+  .fi-tabla th { background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .fi-paciente th { width: 18%; }
+  .fi-meds tr { break-inside: avoid; page-break-inside: avoid; }
+  .fi-meds thead { display: table-header-group; }
+  .fi-sub { font-size: 10.5pt; color: #333; }
+
+  .fi-subtitulo { font-size: 12pt; text-transform: uppercase; letter-spacing: .05em; margin: 12pt 0 4pt; }
+  .fi-texto { margin: 0 0 10pt; white-space: pre-wrap; }
+
+  .fi-firma { margin-top: 56pt; width: 55%; text-align: center; break-inside: avoid; }
+  .fi-linea { border-top: 1pt solid #000; margin-bottom: 3pt; }
+  .fi-firma span { font-size: 10.5pt; }
+  .fi-pie { margin-top: 24pt; border-top: 1pt solid #999; padding-top: 6pt; font-size: 9.5pt; color: #444; }
+}

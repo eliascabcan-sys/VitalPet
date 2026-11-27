@@ -1,0 +1,158 @@
+/* =================================================================
+   Archivo: src/assets/css/legibilidad-movil.css
+   RETO: revisar en celular real y corregir textos que no se leen.
+   Solo aplica en móvil (max-width: 640px, el breakpoint único de tokens.css).
+
+   Reglas:
+   1) Ningún texto por debajo de 14 px.
+   2) Campos de formulario a 16 px: si son menores, iOS Safari hace zoom
+      automático al enfocarlos y la pantalla "salta".
+   3) Todo lo que se toca mide al menos --tap-min (44 px).
+
+   Se importa en main.tsx. Los selectores llevan el prefijo "body" para ganar
+   en especificidad a dueno.css / admin.css, que se cargan después por página.
+================================================================= */
+@media (max-width: 640px) {
+
+  /* ---------- 1) Piso de 14 px para textos ---------- */
+  body .logo-sub,
+  body .user-role-side,
+  body .user-name-side,
+  body .page-sub,
+  body .stat-label,
+  body .vet-banner-detalle,
+  body .vet-banner-badge,
+  body .cita-detalle,
+  body .cita-mes,
+  body .cita-hora,
+  body .cita-motivo,
+  body .mascota-especie,
+  body .mascota-dato,
+  body .btn-historial,
+  body .badge-estado,
+  body .estado-badge,
+  body .chip,
+  body .form-label,
+  body .form-nota,
+  body .franja-ayuda,
+  body .campo label,
+  body .hist-fecha,
+  body .hist-fecha-label,
+  body .hist-campo label,
+  body .hist-campo p,
+  body .hist-modal-fecha,
+  body .hist-modal-campo label,
+  body .conteo,
+  body .sec-subtitulo,
+  body .pet-especie,
+  body .pet-dato,
+  body .del-sub,
+  body .adm-sub,
+  body .adm-ayuda,
+  body .adm-detalle,
+  body .adm-pregunta-meta,
+  body .nivel-chip,
+  body .triaje-intro,
+  body .triaje-nota,
+  body .triaje-card .nivel,
+  body .triaje-card .tiempo,
+  body .triaje-card .desc,
+  body .empty-state-detalle,
+  body .hh-subtitulo,
+  body .hh-menu h4,
+  body .hh-menu button.hh-item,
+  body .empty-state-mensaje,
+  body .filter-bar .filter-bar-fecha,
+  body .filter-bar-fecha label,
+  body .adm-tab,
+  body .adm-check,
+  body .btn-cancelar,
+  body .btn-reintentar,
+  body .hist-acciones button,
+  body .role-label,
+  body .admin-access a {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* Etiquetas en MAYÚSCULAS: 14 px + algo de espacio para que respiren */
+  body .cita-mes,
+  body .triaje-card .nivel,
+  body .hh-menu h4 { letter-spacing: 0.03em; }
+
+  /* Etiqueta de la barra inferior: 14 px también en los 5 accesos */
+  body .bottom-nav-item { font-size: 14px; font-weight: 500; }
+
+  /* Botones principales: 15-16 px */
+  body .btn-guardar,
+  body .btn-enviar,
+  body .btn-nuevo,
+  body .btn-principal,
+  body button[type='submit'] { font-size: 16px; }
+
+  /* ---------- 2) Campos de formulario: 16 px (sin zoom en iOS) ---------- */
+  body input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  body select,
+  body textarea,
+  body .form-input,
+  body .respuesta-seguimiento,
+  body .buscador input,
+  body select.filtro,
+  body .filter-bar select.filtro {
+    font-size: 16px;
+    min-height: var(--tap-min);
+  }
+  body textarea { min-height: 96px; }
+
+  /* ---------- 3) Objetivos táctiles de 44 px ---------- */
+  body button:not(.hh-item),
+  body .btn-guardar,
+  body .btn-enviar,
+  body .btn-nuevo,
+  body .btn-principal,
+  body .btn-historial,
+  body .btn-icono,
+  body .btn-ico,
+  body .btn-accion,
+  body .opcion-btn,
+  body .nav-item,
+  body .filter-bar-limpiar,
+  body .adm-tab,
+  body .btn-cancelar {
+    min-height: var(--tap-min);
+  }
+  body .btn-icono,
+  body .btn-ico,
+  body .btn-logout { min-width: var(--tap-min); width: var(--tap-min); height: var(--tap-min); }
+  body .nav-item { font-size: 16px; padding-top: 12px; padding-bottom: 12px; }
+  body .btn-historial,
+  body .btn-guardar,
+  body .btn-enviar,
+  body .btn-nuevo,
+  body .btn-principal {
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  }
+
+  /* Barra superior: el botón de menú mide 44 px, se compacta el relleno para no engordarla */
+  body .topbar-mobile { padding-top: 8px; padding-bottom: 8px; }
+  body .menu-btn { min-width: var(--tap-min); min-height: var(--tap-min); justify-content: center; margin-left: -10px; }
+
+  /* Enlaces sueltos (volver, olvidaste contraseña, acceso staff): zona táctil
+     de 44 px sin cambiar su aspecto */
+  body a.back-home,
+  body .options a,
+  body .admin-access a,
+  body .marca,
+  body .auth-links a,
+  body a[href='/recuperar-contrasena'],
+  body a[href='/login'],
+  body a[href='/registro'] {
+    display: inline-flex; align-items: center; min-height: var(--tap-min);
+  }
+
+  /* ---------- Portada: texto sobre la foto ----------
+     En móvil el texto cae sobre zonas claras de la foto. Overlay uniforme al 62 %:
+     aun en el pixel más blanco el fondo queda en ~#616161 (texto blanco = 6.4:1). */
+  body .vp-hero-overlay { background: rgba(0, 0, 0, 0.62); }
+  body .vp-hero-contenido p { color: #fff; font-size: 16px; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45); }
+}

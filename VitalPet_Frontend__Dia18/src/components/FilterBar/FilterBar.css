@@ -1,0 +1,44 @@
+/* Barra de filtros (FilterBar.tsx). Complementa .toolbar de admin.css */
+.filter-bar input[type='date'] {
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: var(--fuente);
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radio-boton);
+  background: #fff;
+  color: var(--color-texto);
+  outline: none;
+}
+.filter-bar .filter-bar-fecha {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-texto-suave);
+}
+.filter-bar-limpiar {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: var(--fuente);
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radio-boton);
+  background: #fff;
+  color: var(--color-texto-suave);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transicion);
+}
+.filter-bar-limpiar:hover {
+  color: var(--color-nav);
+  border-color: var(--color-primario);
+}
+
+@media (max-width: 640px) {
+  .filter-bar .buscador { flex-basis: 100%; }
+  .filter-bar select.filtro,
+  .filter-bar .filter-bar-fecha { flex: 1 1 140px; }
+  .filter-bar .filter-bar-fecha input { flex: 1; min-width: 0; }
+}

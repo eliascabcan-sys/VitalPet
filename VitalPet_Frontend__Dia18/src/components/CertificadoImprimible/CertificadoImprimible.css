@@ -1,0 +1,64 @@
+/* Hoja del certificado: invisible en pantalla, única cosa visible al imprimir. */
+.ci-hoja { display: none; }
+
+@media print {
+  @page { size: A4; margin: 16mm; }
+
+  body.imprimiendo-certificado > *:not(.ci-hoja) { display: none !important; }
+  body.imprimiendo-certificado { background: #fff !important; }
+  body.imprimiendo-certificado .ci-hoja { display: block; }
+
+  .ci-hoja {
+    position: relative; font-family: 'Times New Roman', Georgia, serif; color: #000;
+    font-size: 13pt; line-height: 1.5; min-height: 255mm; box-sizing: border-box;
+    display: flex; flex-direction: column; border: 1.5pt solid #000; padding: 12mm;
+  }
+
+  .ci-marca-agua {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 96pt; font-weight: 700; letter-spacing: .1em; color: rgba(180, 0, 0, .18);
+    transform: rotate(-30deg); pointer-events: none; z-index: 0;
+  }
+
+  .ci-cabecera {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16pt;
+    border-bottom: 2pt solid #000; padding-bottom: 8pt; margin-bottom: 14pt;
+  }
+  .ci-clinica { font-size: 17pt; font-weight: 700; }
+  .ci-contacto { font-size: 10pt; color: #333; }
+  .ci-numero { text-align: right; display: flex; flex-direction: column; font-size: 10.5pt; }
+
+  .ci-titulo {
+    text-align: center; text-transform: uppercase; letter-spacing: .08em;
+    font-size: 19pt; margin: 8pt 0 16pt;
+  }
+
+  .ci-tabla { width: 100%; border-collapse: collapse; margin-bottom: 14pt; }
+  .ci-tabla th, .ci-tabla td { border: 1pt solid #000; padding: 5pt 7pt; text-align: left; vertical-align: top; }
+  .ci-tabla th { width: 17%; background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .ci-cuerpo { white-space: pre-wrap; text-align: justify; margin: 0 0 10pt; min-height: 55mm; }
+  .ci-vigencia { font-style: italic; margin: 0 0 12pt; }
+
+  /* Lote + recuadro del sticker (punteado, tamaño de una etiqueta de vacuna) */
+  .ci-fila-sticker { display: flex; gap: 14pt; align-items: stretch; margin: 12pt 0 18pt; break-inside: avoid; }
+  .ci-lote { flex: 1; border: 1pt solid #000; padding: 6pt 8pt; display: flex; flex-direction: column; gap: 14pt; }
+  .ci-etiqueta { font-size: 10pt; text-transform: uppercase; letter-spacing: .06em; }
+  .ci-lote-valor { font-size: 15pt; font-weight: 700; min-height: 18pt; border-bottom: 1pt dotted #000; }
+  .ci-sticker {
+    width: 70mm; height: 38mm; border: 1.5pt dashed #555; display: flex; align-items: center;
+    justify-content: center; text-align: center; font-size: 10pt; color: #666;
+  }
+
+  .ci-firma { margin: 18pt 0 24pt; width: 60%; text-align: center; display: flex; flex-direction: column; align-items: center; break-inside: avoid; }
+  .ci-firma-img { max-height: 24mm; max-width: 100%; object-fit: contain; }
+  .ci-firma-vacia { height: 24mm; }
+  .ci-linea { border-top: 1pt solid #000; width: 100%; margin-bottom: 3pt; }
+  .ci-firma span { font-size: 10.5pt; }
+
+  /* margin-top:auto lo empuja al final de la hoja; si el texto es largo, simplemente baja */
+  .ci-pie {
+    margin-top: auto; border-top: 1pt solid #999; padding-top: 6pt;
+    font-size: 9.5pt; color: #333; display: flex; flex-direction: column; gap: 4pt;
+  }
+}

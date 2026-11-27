@@ -1,0 +1,20 @@
+.es-panel { border: 1px solid #d5dde3; border-radius: var(--radio-tarjeta, 12px); padding: 14px; background: #fff; margin-bottom: 16px; font-family: var(--fuente, inherit); }
+.es-titulo { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.es-titulo small { font-weight: 400; color: var(--color-texto-suave, #5b6770); font-size: 14px; }
+.es-resumen { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+.es-grupo { margin-top: 12px; }
+.es-grupo-tit { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .04em; color: var(--color-texto-suave, #5b6770); margin-bottom: 6px; }
+.es-item { border: 1px solid #e3e8ec; border-left: 4px solid #9aa7b0; border-radius: 8px; padding: 9px 12px; margin-bottom: 6px; }
+.es-item.al_dia { border-left-color: var(--nivel-verde, #2e9e5b); }
+.es-item.proxima { border-left-color: var(--nivel-amarillo, #d9a400); }
+.es-item.vencida { border-left-color: var(--nivel-rojo, #c0392b); }
+.es-item.opcional { border-left-color: #b4b2a9; }
+.es-item-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.es-nombre { font-weight: 600; font-size: 15px; }
+.es-msg { margin: 4px 0 0; font-size: 14px; }
+.es-det { margin: 2px 0 0; font-size: 14px; color: var(--color-texto-suave, #5b6770); }
+.es-estado { font-size: 14px; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; background: #eef1f3; color: #333; }
+.es-estado.al_dia { background: var(--nivel-verde-fondo, #e3f6ea); color: var(--nivel-verde-texto, #1b6b3a); }
+.es-estado.proxima { background: var(--nivel-amarillo-fondo, #fff6d6); color: var(--nivel-amarillo-texto, #7a5c00); }
+.es-estado.vencida { background: var(--nivel-rojo-fondo, #fde4e1); color: var(--nivel-rojo-texto, #a32d2d); }
+.es-nota { margin: 12px 0 0; font-size: 14px; color: var(--color-texto-suave, #5b6770); font-style: italic; }

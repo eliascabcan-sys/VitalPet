@@ -1,0 +1,53 @@
+/* =================================================================
+   Archivo: src/layouts/MainLayout.css
+   Breakpoints: 1024px (tablet, menú compacto) y 640px (móvil).
+================================================================= */
+.main-wrap {
+  margin-left: var(--sidebar-ancho);
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-banner {
+  background: #fff4e5;
+  color: #8a4b08;
+  border-bottom: 1px solid #f5d9ae;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.topbar-mobile {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  background: var(--color-nav);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--sombra-suave);
+}
+.menu-btn { background: none; border: none; color: #fff; font-size: 22px; cursor: pointer; display: flex; align-items: center; }
+.topbar-title { font-size: 15px; font-weight: 700; color: #fff; }
+
+.body { padding: 26px 28px; max-width: 1100px; width: 100%; }
+
+/* Tablet: el menú se compacta a una columna de iconos */
+@media (max-width: 1024px) {
+  .main-wrap { margin-left: var(--sidebar-ancho-compacto); }
+}
+
+/* Móvil: sin columna lateral; topbar arriba y barra inferior abajo */
+@media (max-width: 640px) {
+  .main-wrap { margin-left: 0; }
+  .topbar-mobile { display: flex; }
+  .body {
+    padding: 16px;
+    /* espacio para que la barra inferior no tape el contenido */
+    padding-bottom: calc(var(--barra-inferior-alto) + 16px + env(safe-area-inset-bottom, 0px));
+  }
+}

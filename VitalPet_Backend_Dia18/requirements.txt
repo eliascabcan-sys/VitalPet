@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-dotenv
+python-jose[cryptography]
+python-multipart
+google-auth
+httpx
+requests
+email-validator
+fastapi-mail
+apscheduler
+reportlab
+pytest

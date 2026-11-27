@@ -1,0 +1,45 @@
+/* Toast + modal de confirmación únicos de VitalPet (montados en ToastProvider) */
+.vp-toast {
+  position: fixed; bottom: 24px; right: 24px;
+  max-width: min(360px, calc(100vw - 32px));
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--color-nav, #1A6FA8); color: #fff;
+  padding: 12px 18px; border-radius: var(--radio-boton, 8px);
+  font-size: 14px; font-weight: 500; line-height: 1.35;
+  box-shadow: var(--sombra-media, 0 8px 28px rgba(0,0,0,.13));
+  z-index: 10000;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .3s, transform .3s;
+  pointer-events: none;
+}
+.vp-toast.show { opacity: 1; transform: translateY(0); }
+.vp-toast.ok   { background: #1a7a6a; }
+.vp-toast.error { background: #A32D2D; }
+
+.vp-confirm-overlay {
+  position: fixed; inset: 0; z-index: 10001;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .45); padding: 16px;
+  animation: vp-fade .15s ease;
+}
+.vp-confirm {
+  width: 100%; max-width: 400px; background: #fff; color: var(--color-texto, #2C2C2C);
+  border-radius: var(--radio-tarjeta, 14px); padding: 24px;
+  box-shadow: var(--sombra-fuerte, 0 12px 40px rgba(0,0,0,.18));
+}
+.vp-confirm h3 { margin: 0 0 8px; font-size: 18px; }
+.vp-confirm p  { margin: 0 0 20px; font-size: 14px; line-height: 1.5; }
+.vp-confirm-actions { display: flex; justify-content: flex-end; gap: 10px; }
+.vp-confirm-actions button {
+  padding: 9px 18px; border-radius: var(--radio-boton, 8px); border: none;
+  font-weight: 600; font-size: 14px; cursor: pointer; font-family: inherit;
+}
+.vp-confirm-cancel { background: #e8eef1; color: #333; }
+.vp-confirm-ok { background: var(--color-nav, #1A6FA8); color: #fff; }
+.vp-confirm-ok.peligro { background: #A32D2D; }
+@keyframes vp-fade { from { opacity: 0 } to { opacity: 1 } }
+
+/* Móvil (≤640px): el aviso queda por encima de la barra inferior de accesos */
+@media (max-width: 640px) {
+  .vp-toast { bottom: calc(var(--barra-inferior-alto, 64px) + 16px + env(safe-area-inset-bottom, 0px)); right: 16px; }
+}

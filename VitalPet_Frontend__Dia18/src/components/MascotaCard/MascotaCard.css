@@ -1,0 +1,71 @@
+/* =================================================================
+   Archivo: src/components/MascotaCard/MascotaCard.css
+   Tomado tal cual del bloque "GRID MASCOTAS" de dueno.css.
+================================================================= */
+.grid-mascotas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+.mascota-card {
+  background: #fff;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: var(--radio-tarjeta);
+  padding: 16px 14px 14px;
+  text-align: center;
+  transition: var(--transicion);
+}
+.mascota-card:hover {
+  border-color: var(--color-primario);
+  box-shadow: var(--sombra-suave);
+  transform: translateY(-3px);
+}
+.mascota-avatar { font-size: 36px; margin-bottom: 8px; }
+.mascota-nombre { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--color-texto); }
+.mascota-especie { font-size: 12px; color: var(--color-texto-suave); margin-bottom: 6px; }
+.mascota-dato {
+  font-size: 11px;
+  color: var(--color-texto-suave);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.btn-historial {
+  width: 100%;
+  background: rgba(42, 143, 163, 0.08);
+  color: var(--color-nav);
+  border: 1.5px solid rgba(42, 143, 163, 0.2);
+  border-radius: var(--radio-boton);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--fuente);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: var(--transicion);
+}
+.btn-historial:hover { background: var(--color-primario-fuerte); color: #fff; border-color: var(--color-primario-fuerte); }
+
+.vacio {
+  text-align: center;
+  color: var(--color-texto-suave);
+  padding: 24px;
+  grid-column: 1 / -1;
+}
+.vacio i { font-size: 38px; display: block; margin: 0 auto 10px; color: var(--color-primario-fuerte); opacity: 0.35; }
+
+/* ---------- Botón-enlace a la carpeta de la mascota ---------- */
+/* "Abrir carpeta" es el único enlace de la tarjeta */
+.btn-historial { box-sizing: border-box; text-decoration: none; }
+.mascota-chips { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
+.mascota-chip { font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+@media (max-width: 640px) { .mascota-chip { font-size: 14px; } } /* piso de legibilidad móvil */
+.mascota-chip.ok       { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.mascota-chip.atencion { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.mascota-chip.cita     { background: var(--nivel-azul-fondo);    color: var(--nivel-azul-texto); }
+.mascota-chip.sin      { background: var(--color-fondo);         color: var(--color-texto-suave); font-weight: 500; }

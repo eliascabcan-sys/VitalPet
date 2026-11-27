@@ -1,0 +1,13 @@
+/* =================================================================
+   Lista de pacientes (veterinario / administrador).
+   Cada tarjeta es una "carpeta": el nombre abre la ficha, y se ve de
+   quién es la mascota y cuándo es su próxima cita. Prefijo "pp-".
+================================================================= */
+.pp-enlace { color: inherit; text-decoration: none; display: block; }
+.pp-enlace:hover .pet-nombre { color: var(--color-primario-fuerte); text-decoration: underline; }
+
+.pp-dueno { font-weight: 600; color: var(--color-texto); }
+.pp-cita { margin-top: 6px; padding: 5px 10px; border-radius: 10px; font-size: 12.5px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.pp-cita.hay  { background: var(--nivel-azul-fondo); color: var(--nivel-azul-texto); }
+.pp-cita.pend { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.pp-cita.nada { background: var(--color-fondo); color: var(--color-texto-gris); font-weight: 500; }

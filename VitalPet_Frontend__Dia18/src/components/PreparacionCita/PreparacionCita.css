@@ -1,0 +1,45 @@
+/* =================================================================
+   "Antes de tu cita" dentro de cada cita de Mis citas.
+   Una etiqueta pequeña (como las demás del panel) que se despliega con
+   el detalle: vacunas / desparasitación y exámenes. Usa los mismos
+   tokens de color que el resto de la app.
+================================================================= */
+.prep { margin-top: 8px; }
+
+.prep-chip {
+display: inline-flex; align-items: center; gap: 6px;
+font-family: var(--fuente); font-size: 12.5px; font-weight: 600;
+padding: 4px 11px; border-radius: 20px; border: none; cursor: pointer;
+background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto);
+transition: var(--transicion);
+}
+.prep-chip:hover { filter: brightness(0.95); }
+.prep-chip i { font-size: 14px; transition: transform 0.2s ease; }
+.prep-chip[aria-expanded="true"] i.prep-flecha { transform: rotate(180deg); }
+
+.prep-ok {
+display: inline-flex; align-items: center; gap: 6px;
+font-size: 12.5px; font-weight: 600; color: var(--nivel-verde-texto);
+}
+
+.prep-panel {
+margin-top: 8px; padding: 12px 14px; border-radius: 12px;
+background: var(--color-fondo); border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.prep-grupo + .prep-grupo { margin-top: 10px; }
+.prep-grupo-titulo {
+font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+color: var(--color-texto-suave); margin-bottom: 6px;
+}
+.prep-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.prep-item { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 13px; color: var(--color-texto); }
+.prep-etiqueta {
+font-size: 10.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+}
+.prep-etiqueta.vencida   { background: var(--nivel-rojo-fondo);     color: var(--nivel-rojo-texto); }
+.prep-etiqueta.proxima   { background: var(--nivel-amarillo-fondo); color: var(--nivel-amarillo-texto); }
+.prep-etiqueta.sin_datos,
+.prep-etiqueta.solicitado,
+.prep-etiqueta.en_proceso { background: var(--nivel-azul-fondo);    color: var(--nivel-azul-texto); }
+.prep-detalle { font-size: 12px; color: var(--color-texto-suave); }
+.prep-pie { margin: 10px 0 0; font-size: 12px; color: var(--color-texto-suave); }

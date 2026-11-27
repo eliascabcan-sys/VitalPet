@@ -1,0 +1,59 @@
+/* Historia clínica maquetada como hoja de Word + menú lateral de secciones */
+.hh-modal {
+  width: min(1100px, 96vw); height: min(88vh, 900px);
+  background: #fff; border-radius: var(--radio-tarjeta, 14px);
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: var(--sombra-fuerte, 0 12px 40px rgba(0,0,0,.18));
+}
+.hh-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid #e3e8ec; font-weight: 700; font-size: 17px;
+}
+.hh-layout { display: flex; flex: 1; min-height: 0; }
+
+.hh-menu {
+  width: 210px; flex-shrink: 0; padding: 16px 12px; overflow-y: auto;
+  background: #f4f6f8; border-right: 1px solid #e3e8ec;
+}
+.hh-menu h4 { margin: 0 0 8px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b7780; }
+.hh-menu select { width: 100%; margin-bottom: 14px; padding: 7px; border-radius: 6px; border: 1px solid #cfd6dc; font-family: inherit; }
+.hh-menu button.hh-item {
+  display: block; width: 100%; text-align: left; border: none; background: transparent;
+  padding: 8px 10px; border-radius: 6px; font-size: 13.5px; cursor: pointer;
+  font-family: inherit; color: #2c2c2c; border-left: 3px solid transparent;
+}
+.hh-menu button.hh-item:hover { background: #e6edf1; }
+.hh-menu button.hh-item.activo { background: #dbeaf3; border-left-color: var(--color-nav, #1A6FA8); font-weight: 600; }
+
+.hh-escritorio { flex: 1; overflow-y: auto; background: #d9dde1; padding: 28px 16px; scroll-behavior: smooth; }
+.hh-hoja {
+  max-width: 794px; min-height: 1000px; margin: 0 auto; background: #fff;
+  padding: 56px 64px; box-shadow: 0 2px 10px rgba(0,0,0,.25);
+  font-family: 'Times New Roman', Georgia, serif; color: #111; line-height: 1.55;
+}
+.hh-titulo { text-align: center; margin: 0; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; }
+.hh-subtitulo { text-align: center; margin: 2px 0 22px; font-size: 13px; color: #555; }
+.hh-seccion { margin-top: 22px; scroll-margin-top: 12px; }
+.hh-seccion h3 {
+  margin: 0 0 8px; font-size: 14px; text-transform: uppercase; letter-spacing: .05em;
+  border-bottom: 1.5px solid #111; padding-bottom: 3px;
+}
+.hh-seccion p { margin: 0; font-size: 14.5px; white-space: pre-wrap; }
+.hh-vacio { color: #888; font-style: italic; }
+.hh-tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+.hh-tabla td { border: 1px solid #333; padding: 5px 8px; }
+.hh-tabla td.k { background: #f1f1f1; font-weight: 700; width: 24%; }
+
+@media (max-width: 640px) {
+  .hh-layout { flex-direction: column; }
+  .hh-menu { width: auto; display: flex; gap: 6px; overflow-x: auto; border-right: none; border-bottom: 1px solid #e3e8ec; padding: 8px; }
+  .hh-menu h4, .hh-menu select { display: none; }
+  .hh-menu button.hh-item { white-space: nowrap; width: auto; border-left: none; border-bottom: 3px solid transparent; }
+  .hh-menu button.hh-item.activo { border-bottom-color: var(--color-nav, #1A6FA8); }
+  .hh-hoja { padding: 28px 20px; min-height: 0; }
+}
+@media print {
+  .hh-menu, .hh-header { display: none; }
+  .hh-escritorio { background: #fff; padding: 0; overflow: visible; }
+  .hh-hoja { box-shadow: none; }
+}

@@ -1,0 +1,20 @@
+    /* =================================================================
+    Pantalla del laboratorio (veterinario / administrador).
+    Reutiliza las clases del panel clínico (sec-header, stats, toolbar,
+    hist-card, modal-caja...) y solo agrega lo propio: la etiqueta de
+    "cuánto lleva esperando" y el nombre del examen.
+    ================================================================= */
+.labv-examen { font-size: 15px; font-weight: 700; color: var(--color-texto); }
+.labv-categoria { font-size: 12px; color: var(--color-texto-suave); }
+
+/* Cuánto lleva esperando un examen pendiente: gris < 3 días, naranja 3-4, rojo 5 o más */
+.labv-espera {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+.labv-espera.neutro  { background: var(--nivel-azul-fondo);    color: var(--nivel-azul-texto); }
+.labv-espera.naranja { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.labv-espera.rojo    { background: var(--nivel-rojo-fondo);    color: var(--nivel-rojo-texto); }
+
+.labv-fila { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.labv-modal-sub { font-size: 12px; color: var(--color-texto-suave); margin: -10px 0 4px; }

@@ -1,0 +1,29 @@
+/* Estado vacío (EmptyState.tsx). No depende de admin.css */
+.empty-state {
+  grid-column: 1 / -1; /* ocupa todo el ancho si está dentro de un grid */
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--color-texto-suave);
+  font-size: 14px;
+}
+.empty-state > i {
+  font-size: 36px;
+  display: block;
+  margin: 0 auto 10px;
+  color: var(--color-primario-fuerte);
+  opacity: 0.35;
+}
+.empty-state-mensaje { font-weight: 600; color: var(--color-texto); }
+.empty-state-detalle { margin-top: 4px; font-size: 12px; }
+.empty-state-accion { margin-top: 14px; }
+.empty-state-accion button {
+  padding: 8px 16px;
+  border-radius: var(--radio-boton);
+  border: 1.5px solid var(--color-primario);
+  background: #fff;
+  color: var(--color-nav);
+  font-family: var(--fuente);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,0 +1,17 @@
+/* Etiqueta de nivel de triaje (NivelChip.tsx) */
+.nivel-chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nivel-chip-rojo        { background: #FCEBEB;                 color: #A32D2D; }
+.nivel-chip-naranja     { background: rgba(244,132,95,0.15);   color: var(--nivel-naranja-texto); }
+.nivel-chip-amarillo    { background: rgba(184,148,42,0.18);   color: #7a6115; }
+.nivel-chip-verde       { background: rgba(109,214,194,0.2);   color: #1a7a6a; }
+.nivel-chip-azul        { background: rgba(42,111,158,0.15);   color: #1f5f8b; }
+.nivel-chip-desconocido { background: rgba(180,178,169,0.2);   color: #555; }

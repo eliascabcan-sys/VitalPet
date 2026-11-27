@@ -1,0 +1,674 @@
+/* =================================================================
+   Archivo: src/assets/css/panel-vitalpet.css
+   Look de los paneles autenticados (dueño, veterinario, administrador),
+   alineado con la landing y las pantallas de acceso:
+     · mismo azul de menú (--color-nav) y mismo pie azul profundo
+     · logo del perro con la línea de pulso, también en el menú
+     · botones principales en terracota (--color-acento-fuerte)
+     · tarjetas blancas de esquinas grandes sobre el fondo celeste
+     · una línea de pulso como divisor de cada encabezado de página
+
+   Reglas del archivo:
+   - SOLO apariencia. No toca lógica, rutas, ni alturas mínimas táctiles
+     de legibilidad-movil.css.
+   - Se importa en MainLayout.tsx DESPUÉS de panel-visual.css, y casi todo
+     va bajo .main-wrap o .sidebar para ganar por especificidad sin !important.
+   - Los colores salen de tokens.css (no se declara :root aquí).
+   - Breakpoints del proyecto: 1024px y 640px.
+================================================================= */
+
+
+/* =================================================================
+   1. MENÚ LATERAL
+================================================================= */
+.sidebar {
+  background: linear-gradient(190deg, var(--color-nav) 0%, #17639a 58%, var(--azul-profundo) 100%);
+  box-shadow: 6px 0 28px rgba(8, 40, 68, 0.14);
+}
+
+/* Marca: logo del perro + "VitalPet" con "Pet" en durazno, como en la landing */
+.sidebar .sidebar-logo {
+  position: relative;
+  gap: 10px;
+  padding: 16px 16px 28px;
+  border-bottom: 0;
+}
+.sidebar .sidebar-logo-img {
+  display: block;
+  height: 44px;
+  width: auto;
+  flex-shrink: 0;
+}
+.sidebar .logo-name {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.2px;
+  color: #fff;
+}
+.sidebar .logo-name span { color: var(--color-acento-claro); }
+
+/* Rol: etiqueta sobre fondo azul oscuro translúcido (contraste >= 4.5:1) */
+.sidebar .logo-sub {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(8, 40, 68, 0.38);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #fff;
+}
+.sidebar.rol-dueno .logo-sub { color: #ffd9cc; }
+.sidebar.rol-veterinario .logo-sub { color: var(--texto-destacado-sobre-nav); }
+
+/* Línea de pulso bajo la marca (la misma de la landing) */
+.sidebar .sidebar-logo::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 6px;
+  height: 16px;
+  pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 16'%3E%3Cpath d='M0,8 H28 L33,8 L37,1.5 L42,14.5 L46,4 L49,8 H72' fill='none' stroke='%23ffb59c' stroke-opacity='0.7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center / 72px 16px no-repeat,
+    linear-gradient(rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)) 71px 50% / calc(100% - 71px) 1.5px no-repeat;
+}
+
+.sidebar .sidebar-nav { padding: 6px 12px 14px; gap: 2px; }
+
+/* Títulos de grupo: texto normal en menta (sin mayúsculas ni opacidad que bajen el contraste) */
+.sidebar .nav-seccion {
+  padding: 4px 12px 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 1;
+  color: var(--texto-destacado-sobre-nav);
+}
+.sidebar .nav-grupo + .nav-grupo { margin-top: 16px; }
+
+.sidebar .nav-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.sidebar .nav-item:hover { background: rgba(255, 255, 255, 0.11); }
+
+/* Activo: pastilla blanca con el icono en terracota (como los botones de la landing) */
+.sidebar .nav-item.active {
+  background: #fff;
+  color: var(--color-nav);
+  font-weight: 700;
+  border-left-color: transparent; /* se conserva el ancho del borde para que el texto no se mueva */
+  box-shadow: 0 6px 16px rgba(8, 40, 68, 0.22);
+}
+.sidebar .nav-item.active i { color: var(--color-acento-fuerte); }
+
+/* Pie: perfil + salir */
+.sidebar .sidebar-footer {
+  padding: 12px;
+  border-top: 0;
+  background: rgba(8, 40, 68, 0.3);
+}
+.sidebar .sidebar-footer-perfil {
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.sidebar .sidebar-footer-perfil:hover { background: rgba(255, 255, 255, 0.16); }
+.sidebar .avatar-side {
+  width: 38px;
+  height: 38px;
+  background: var(--color-acento-claro);
+  color: #6b2a10;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+.sidebar .user-name-side { font-size: 14px; font-weight: 700; max-width: 104px; }
+.sidebar .btn-logout {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+}
+.sidebar .btn-logout:hover { background: rgba(255, 255, 255, 0.18); }
+
+/* Tablet: menú compacto (solo iconos) */
+@media (max-width: 1024px) {
+  .sidebar .sidebar-logo { padding: 14px 8px 12px; }
+  .sidebar .sidebar-logo::after { display: none; }
+  .sidebar .sidebar-logo-img { width: 56px; height: auto; }
+  .sidebar .nav-item { border-radius: 14px; }
+  .sidebar .nav-item.active { border-left-width: 0; }
+  .sidebar .sidebar-footer { padding: 12px 8px; }
+  .sidebar .sidebar-footer-perfil { background: none; padding: 4px; }
+}
+
+/* Móvil: el menú deslizable vuelve a ser completo */
+@media (max-width: 640px) {
+  .sidebar .sidebar-logo { padding: 16px 16px 28px; }
+  .sidebar .sidebar-logo::after { display: block; }
+  .sidebar .sidebar-logo-img { width: auto; height: 44px; }
+  .sidebar .nav-item.active { border-left-width: 3px; }
+  .sidebar .sidebar-footer { padding: 12px; }
+  .sidebar .sidebar-footer-perfil { background: rgba(255, 255, 255, 0.08); padding: 8px 10px; }
+}
+
+/* Barra superior y barra inferior en móvil */
+.topbar-mobile {
+  background: linear-gradient(90deg, var(--color-nav), #17639a);
+  border-radius: 0 0 18px 18px;
+  padding: 10px 16px;
+  box-shadow: 0 8px 22px rgba(8, 40, 68, 0.18);
+}
+.topbar-mobile .menu-btn {
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+}
+.topbar-mobile .topbar-title { font-size: 17px; font-weight: 700; }
+
+.bottom-nav {
+  background: linear-gradient(0deg, var(--azul-profundo), var(--color-nav));
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -8px 24px rgba(8, 40, 68, 0.22);
+}
+.bottom-nav .bottom-nav-item.active { border-top-color: var(--color-acento-claro); }
+
+.demo-banner { font-size: 13.5px; }
+
+
+/* =================================================================
+   2. ÁREA DE CONTENIDO Y ENCABEZADO DE PÁGINA
+================================================================= */
+@media (min-width: 1025px) {
+  .main-wrap .body { padding: 32px 40px 56px; max-width: 1180px; }
+}
+
+.main-wrap :is(.section-header, .sec-header) {
+  margin-bottom: 26px;
+  padding-bottom: 28px;
+  align-items: flex-end;
+}
+
+/* Divisor: pulso + línea fina (reemplaza la barra de color) */
+.main-wrap :is(.section-header, .sec-header)::after {
+  height: 16px;
+  border-radius: 0;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 16'%3E%3Cpath d='M0,8 H28 L33,8 L37,1.5 L42,14.5 L46,4 L49,8 H72' fill='none' stroke='%232a8fa3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") left center / 72px 16px no-repeat,
+    linear-gradient(rgba(26, 111, 168, 0.16), rgba(26, 111, 168, 0.16)) 71px 50% / calc(100% - 71px) 1.5px no-repeat;
+}
+
+.main-wrap :is(.page-title, .sec-titulo) {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--color-nav);
+}
+.main-wrap :is(.page-sub, .sec-subtitulo) {
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-texto-suave);
+}
+
+@media (max-width: 640px) {
+  .main-wrap :is(.page-title, .sec-titulo) { font-size: 24px; }
+  .main-wrap :is(.section-header, .sec-header) { margin-bottom: 20px; padding-bottom: 24px; }
+}
+
+
+/* =================================================================
+   3. TARJETAS
+================================================================= */
+.main-wrap :is(
+  .stat, .cita-card, .cita-vacia, .form-card, .formulario-card, .mascota-card, .card,
+  .hist-card, .fc-cabecera, .fc-tarjeta, .av-franja, .av-panel, .av-semana, .adm-tabla-wrap,
+  .aut-bloque, .autp-item, .vcp-bloque, .reporte-card
+) {
+  background: #fff;
+  border: 1px solid var(--borde-tarjeta);
+  border-radius: var(--radio-grande);
+  box-shadow: var(--sombra-tarjeta);
+}
+
+/* Filas de lista (citas, historial, alertas): más pequeñas; se conserva la franja de color
+   del lado izquierdo que pinta panel-visual.css según el estado */
+.main-wrap :is(.cita-row, .cita-fila, .hist-fila, .aut-item) {
+  background: #fff;
+  border-top-color: var(--borde-tarjeta);
+  border-right-color: var(--borde-tarjeta);
+  border-bottom-color: var(--borde-tarjeta);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(18, 70, 110, 0.05);
+}
+.main-wrap :is(.cita-row, .cita-fila, .hist-fila):hover {
+  border-top-color: rgba(42, 143, 163, 0.45);
+  border-right-color: rgba(42, 143, 163, 0.45);
+  border-bottom-color: rgba(42, 143, 163, 0.45);
+  box-shadow: var(--sombra-tarjeta);
+}
+.main-wrap :is(.hist-card, .card, .mascota-card):hover {
+  border-color: rgba(42, 143, 163, 0.45);
+  box-shadow: var(--sombra-media);
+}
+
+.main-wrap .cita-card { border-left: 5px solid var(--color-acento-fuerte); }
+
+/* Bloque de fecha de las citas */
+.main-wrap :is(.cita-fecha-block, .cita-fecha-bloque) {
+  background: var(--fondo-suave);
+  border-radius: 14px;
+}
+.main-wrap .cita-hora { color: var(--color-primario-fuerte); }
+
+/* Iconos en cuadro suave */
+.main-wrap :is(.cita-icono, .pet-avatar) {
+  border-radius: 14px;
+  background: var(--fondo-suave);
+  color: var(--color-primario-fuerte);
+}
+
+
+/* =================================================================
+   4. INICIO DEL DUEÑO: banner de la veterinaria y estadísticas
+================================================================= */
+.main-wrap .vet-banner {
+  gap: 22px;
+  padding: 26px 30px;
+  border-radius: 24px;
+  background: linear-gradient(115deg, var(--color-primario-fuerte) 0%, var(--color-nav) 78%);
+  box-shadow: 0 16px 36px rgba(26, 111, 168, 0.28);
+}
+.main-wrap .vet-banner-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 28px;
+}
+.main-wrap .vet-banner-nombre { font-size: 21px; }
+.main-wrap .vet-banner-detalle { font-size: 14px; }
+.main-wrap .vet-banner-badge {
+  padding: 5px 12px;
+  background: rgba(8, 40, 68, 0.3);
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.main-wrap .stats {
+  gap: 16px;
+  margin-bottom: 28px;
+  /* dueno.css (3 columnas) y admin.css (4 columnas) definen .stats a la vez; así se adapta a 3 o 4 tarjetas */
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+@media (max-width: 640px) {
+  .main-wrap .stats { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+}
+.main-wrap .stat { padding: 20px 22px; gap: 16px; background: #fff; }
+.main-wrap .stat:hover { transform: translateY(-2px); box-shadow: var(--sombra-media); }
+.main-wrap :is(.stat-icon, .stat-icono) {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  font-size: 26px;
+  box-shadow: none;
+  background: rgba(27, 107, 125, 0.1);
+  color: var(--color-primario-fuerte);
+}
+.main-wrap :is(.stat-icon, .stat-icono).verde  { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.main-wrap :is(.stat-icon, .stat-icono).acento { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.main-wrap .stat-label { font-size: 13.5px; font-weight: 600; }
+.main-wrap :is(.stat-value, .stat-valor) { font-size: 34px; font-weight: 700; letter-spacing: -0.02em; }
+
+
+/* Móvil: banner y estadísticas más compactos para que el texto no se apriete */
+@media (max-width: 640px) {
+  .main-wrap .vet-banner { padding: 20px 18px; gap: 14px; border-radius: 20px; }
+  .main-wrap .vet-banner::after { display: none; }
+  .main-wrap .vet-banner-icon { width: 48px; height: 48px; border-radius: 14px; font-size: 22px; }
+  .main-wrap .vet-banner-nombre { font-size: 18px; }
+  .main-wrap .stat { padding: 14px; gap: 12px; }
+  .main-wrap :is(.stat-icon, .stat-icono) { width: 44px; height: 44px; border-radius: 14px; font-size: 22px; }
+  .main-wrap :is(.stat-value, .stat-valor) { font-size: 28px; }
+  .main-wrap .stat-label { font-size: 13px; }
+  .main-wrap .stat:last-child:nth-child(odd) { grid-column: 1 / -1; } /* si queda una sola tarjeta, ocupa el ancho */
+  .main-wrap .mascota-card { padding: 18px 14px 14px; }
+}
+
+
+/* =================================================================
+   5. MASCOTAS
+================================================================= */
+.main-wrap .grid-mascotas { gap: 18px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.main-wrap .grid { gap: 18px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+
+.main-wrap .mascota-card { padding: 24px 18px 18px; border-radius: 22px; }
+.main-wrap .card { padding: 20px 18px 14px; }
+.main-wrap .mascota-card:hover { transform: translateY(-3px); }
+.main-wrap .mascota-nombre { font-size: 17px; }
+
+/* "Abrir carpeta": botón sólido en verde azulado, como "Ver más" de la landing */
+.main-wrap .btn-historial {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 0;
+  background: var(--color-primario-fuerte);
+  color: #fff;
+  font-weight: 700;
+}
+.main-wrap .btn-historial:hover { background: var(--color-nav); color: #fff; }
+
+.main-wrap :is(.mascota-chip, .badge-estado, .estado-badge, .chip, .nivel-chip, .aut-etiqueta, .labv-espera) {
+  border-radius: 999px;
+  font-weight: 700;
+}
+.main-wrap .mascota-chip { padding: 4px 12px; }
+
+.main-wrap .dueno-tag { border-radius: 999px; padding: 4px 10px; background: var(--fondo-suave); }
+.main-wrap .pet-nombre { font-size: 16px; }
+
+
+/* =================================================================
+   6. BOTONES
+================================================================= */
+/* Principales: terracota (igual que "Registrarse" y "Iniciar sesión") */
+.main-wrap :is(.btn-nuevo, .btn-enviar, .btn-guardar, .reporte-btn-prim, .dm-btn.primario) {
+  background: var(--color-acento-fuerte);
+  border-color: var(--color-acento-fuerte);
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(179, 83, 48, 0.28);
+}
+.main-wrap :is(.btn-nuevo, .btn-enviar, .btn-guardar, .reporte-btn-prim, .dm-btn.primario):hover {
+  background: #9c4626;
+  border-color: #9c4626;
+  filter: none;
+  transform: translateY(-1px);
+}
+.main-wrap :is(.btn-nuevo, .btn-enviar, .btn-guardar, .reporte-btn-prim):disabled { box-shadow: none; transform: none; }
+
+/* Secundarios: borde azul fino sobre blanco */
+.main-wrap :is(.btn-cancelar, .reporte-btn-sec, .av-btn, .aut-btn-secundario, .dm-btn, .filter-bar-limpiar, .av-hoy, .btn-accion, .lab-btn.sec) {
+  border-radius: 12px;
+  border-color: rgba(26, 111, 168, 0.25);
+  background: #fff;
+  color: var(--color-nav);
+  font-weight: 700;
+}
+.main-wrap :is(.btn-cancelar, .reporte-btn-sec, .av-btn, .aut-btn-secundario, .dm-btn, .filter-bar-limpiar, .av-hoy, .btn-accion):hover {
+  background: var(--fondo-suave);
+  border-color: var(--color-primario);
+  color: var(--color-nav);
+}
+.main-wrap .av-btn.primario {
+  background: var(--color-primario-fuerte);
+  border-color: var(--color-primario-fuerte);
+  color: #fff;
+}
+.main-wrap .av-btn.primario:hover { background: var(--color-nav); border-color: var(--color-nav); color: #fff; }
+.main-wrap .btn-accion { font-size: 12.5px; }
+
+/* Botones de icono */
+.main-wrap :is(.btn-ico, .btn-icono, .av-nav-btn) {
+  border-radius: 12px;
+  border-color: rgba(26, 111, 168, 0.2);
+  color: var(--color-nav);
+}
+.main-wrap :is(.btn-ico, .btn-icono, .av-nav-btn):hover { background: var(--fondo-suave); border-color: var(--color-primario); }
+.main-wrap :is(.btn-ico.rojo, .btn-icono-danger):hover { background: var(--nivel-rojo-fondo); border-color: #f09595; color: var(--nivel-rojo); }
+
+.main-wrap .btn-emergencia { border-radius: 999px; }
+
+
+/* =================================================================
+   7. FORMULARIOS Y FILTROS
+================================================================= */
+.main-wrap :is(.form-input, .campo input, .campo select, .campo textarea, .buscador input, select.filtro,
+  .filter-bar input[type='date'], select.av-vet, .sp-buscar, .lab-form input, .lab-form select, .lab-form textarea) {
+  background: #fff;
+  border: 1.5px solid rgba(26, 111, 168, 0.22);
+  border-radius: 12px;
+}
+.main-wrap :is(.form-input, .campo input, .campo select, .buscador input, select.filtro, select.av-vet, .sp-buscar) {
+  min-height: 44px;
+}
+.main-wrap :is(.form-label, .campo label, .sp-et) { font-weight: 600; color: var(--color-texto); }
+
+.main-wrap :is(.opcion-btn, .av-pill, .av-dato, .av-contador) { border-radius: 999px; }
+.main-wrap .opcion-btn { border-color: rgba(26, 111, 168, 0.22); background: #fff; }
+.main-wrap .opcion-btn:hover { background: var(--fondo-suave); }
+.main-wrap .opcion-btn.activo { background: var(--color-primario-fuerte); color: #fff; }
+
+.main-wrap .franja-card { border-radius: 16px; border: 2px solid rgba(26, 111, 168, 0.18); }
+.main-wrap .franja-card.sel {
+  border-color: var(--color-primario-fuerte);
+  background: rgba(27, 107, 125, 0.08);
+}
+
+.main-wrap .reporte-opcion { border-radius: 16px; border-color: rgba(26, 111, 168, 0.2); background: #fff; }
+.main-wrap .reporte-opcion:hover { background: var(--fondo-suave); }
+.main-wrap .reporte-opcion.activo { background: var(--color-primario-fuerte); }
+.main-wrap .reporte-pregunta { font-size: 22px; }
+.main-wrap .reporte-barra { background: var(--fondo-suave); }
+
+.main-wrap .conteo { font-size: 13.5px; font-weight: 600; }
+
+
+/* =================================================================
+   8. PESTAÑAS Y SELECTORES: pastillas
+================================================================= */
+.main-wrap .adm-tabs { gap: 8px; border-bottom: 0; margin-bottom: 18px; }
+.main-wrap .adm-tab {
+  margin-bottom: 0;
+  padding: 9px 18px;
+  border: 1.5px solid rgba(26, 111, 168, 0.2);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--color-nav);
+}
+.main-wrap .adm-tab:hover { background: var(--fondo-suave); }
+.main-wrap .adm-tab.activa {
+  background: var(--color-nav);
+  border-color: var(--color-nav);
+  color: #fff;
+}
+
+.main-wrap .fc-tabs { gap: 8px; border-bottom: 0; padding: 6px 0 8px; margin-bottom: 8px; }
+.main-wrap .fc-tab {
+  margin-bottom: 0;
+  padding: 9px 16px;
+  border: 1.5px solid rgba(26, 111, 168, 0.2);
+  border-radius: 999px;
+  background: #fff;
+}
+.main-wrap .fc-tab:hover { background: var(--fondo-suave); }
+.main-wrap .fc-tab.activa { background: var(--color-nav); border-color: var(--color-nav); color: #fff; }
+.main-wrap .fc-tab.activa .fc-tab-n { background: rgba(255, 255, 255, 0.22); color: #fff; }
+
+.main-wrap .av-segmentado { border-radius: 14px; border-color: rgba(26, 111, 168, 0.22); }
+.main-wrap .av-segmentado button { border-radius: 11px; }
+.main-wrap .av-segmentado button.activo { background: var(--color-nav); }
+.main-wrap .fp-nav a { border-color: rgba(26, 111, 168, 0.3); }
+
+
+/* =================================================================
+   9. TABLAS (administrador)
+================================================================= */
+.main-wrap .adm-tabla-wrap { overflow-x: auto; }
+.main-wrap .adm-tabla th {
+  padding: 14px 16px;
+  background: var(--fondo-suave);
+  border-bottom: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-nav);
+}
+.main-wrap .adm-tabla td { padding: 14px 16px; }
+.main-wrap .adm-tabla tbody tr:hover td { background: #f6fafc; }
+.main-wrap .adm-total { border-top-color: var(--borde-tarjeta); }
+
+
+/* =================================================================
+   10. HISTORIAL, FICHA DEL PACIENTE Y AGENDA
+================================================================= */
+.main-wrap :is(.hist-campo label, .fc-dato-et, .hf-titulo, .prep-grupo-titulo, .es-grupo-tit, .vc-grupo-titulo) {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.main-wrap .hist-campo label { font-size: 12.5px; color: var(--color-primario-fuerte); }
+.main-wrap :is(.hist-card > .hist-campo, .hist-cols .hist-campo) {
+  border-radius: 12px;
+  background: #f4f9fb;
+  border-left-color: var(--color-primario);
+}
+.main-wrap .hist-mascota, .main-wrap .hist-mascota-label { font-size: 15px; }
+.main-wrap .hist-acciones button { border-radius: 10px; border-color: rgba(26, 111, 168, 0.22); color: var(--color-nav); font-weight: 600; }
+.main-wrap .hist-acciones { border-top-color: var(--borde-tarjeta); }
+.main-wrap .venta-valor { color: var(--nivel-verde-texto) !important; }
+
+.main-wrap .fc-cabecera { padding: 22px 26px 24px; border-radius: 24px; }
+.main-wrap .fc-avatar { border-radius: 20px; background: var(--fondo-suave); }
+.main-wrap .fc-nombre { font-size: 28px; letter-spacing: -0.01em; }
+.main-wrap .fc-dato { border-radius: 14px; background: #f4f9fb; padding: 12px 16px; }
+.main-wrap .fc-dato-et { font-size: 12.5px; font-weight: 600; }
+.main-wrap .fc-tarjeta { padding: 20px 22px; }
+.main-wrap .fc-tarjeta-tit { font-size: 16px; }
+.main-wrap .fc-avisos button, .main-wrap .fc-avisos .fc-aviso-info { border-radius: 14px; }
+
+.main-wrap .av-franja { padding: 20px 22px; }
+.main-wrap .av-franja-nombre { font-size: 17px; }
+.main-wrap .av-cita { border-radius: 14px; background: #f4f9fb; }
+.main-wrap .av-semana { border-radius: var(--radio-grande); }
+.main-wrap .av-semana-enc { background: var(--fondo-suave); }
+.main-wrap .av-semana-dia.hoy .av-dia-num { background: var(--color-acento-fuerte); }
+.main-wrap .av-barra, .main-wrap .av-cupos i { background: var(--fondo-suave); }
+.main-wrap .av-dato { border-color: var(--borde-tarjeta); }
+
+.main-wrap .cm-dia { border-radius: 12px; border-color: var(--borde-tarjeta); }
+.main-wrap .cm-dia.con { background: var(--fondo-suave); }
+.main-wrap .cm-dia.hoy .cm-num { background: var(--color-acento-fuerte); }
+.main-wrap .cm-dia.sel { outline-color: var(--color-nav); }
+
+.main-wrap :is(.lab-panel, .es-panel, .prep-panel) {
+  border: 1px solid var(--borde-tarjeta);
+  border-radius: 18px;
+}
+.main-wrap :is(.lab-item, .es-item, .fp-tarjeta, .fp-control) { border-radius: 14px; }
+.main-wrap .lab-btn { border-radius: 12px; font-weight: 700; }
+.main-wrap :is(.lab-estado, .es-estado, .prep-chip, .prep-etiqueta) { border-radius: 999px; font-weight: 700; }
+
+/* Alertas, triaje */
+.main-wrap .alertas-aviso { border-radius: 14px; font-size: 13.5px; font-weight: 600; }
+.main-wrap .triaje-card { border-radius: 20px; padding: 22px 24px; box-shadow: var(--sombra-tarjeta); }
+.main-wrap .triaje-card .nivel { font-size: 13px; text-transform: none; letter-spacing: 0; }
+.main-wrap .triaje-nota { border-radius: 14px; background: #fff; border: 1px solid var(--borde-tarjeta); }
+
+/* Autorizaciones y certificados */
+.main-wrap .aut-bloque { padding: 22px 24px; }
+.main-wrap .aut-consentimiento-texto { border-radius: 14px; background: #f4f9fb; }
+.main-wrap .aut-estado-icono { border-radius: 14px; }
+.main-wrap .vcp-bloque { padding: 22px; }
+.main-wrap .vcp-tarjeta { border-radius: 14px; border-color: var(--borde-tarjeta); }
+.main-wrap :is(.vcp-verif-form, .vcp-selector) :is(input, select) { border-radius: 12px; border-color: rgba(26, 111, 168, 0.22); }
+.main-wrap .vcp-titulo { color: var(--color-nav); }
+
+.main-wrap :is(.empty-state, .vacio) i,
+.main-wrap .empty-state > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  background: var(--fondo-suave);
+  font-size: 34px;
+  opacity: 1;
+  color: var(--color-primario-fuerte);
+}
+.main-wrap .empty-state-accion button { border-radius: 12px; border-color: rgba(26, 111, 168, 0.25); color: var(--color-nav); }
+
+.main-wrap .skeleton { border-radius: 16px; background: linear-gradient(90deg, #e1eef5 25%, #f2f8fb 37%, #e1eef5 63%); background-size: 400% 100%; }
+
+
+/* =================================================================
+   11. MODALES, AVISOS Y CONFIRMACIONES
+   (fuera de .main-wrap: el modal de perfil se monta en el menú, por eso van con "body")
+================================================================= */
+body :is(.modal-bg, .modal-fondo, .emerg-fondo) {
+  background: var(--velo-modal);
+  backdrop-filter: blur(4px);
+}
+body :is(.modal-dueno, .modal-caja) {
+  padding: 26px 28px 22px;
+  border: 1px solid var(--borde-tarjeta);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(8, 40, 68, 0.28);
+}
+body :is(.modal-titulo-fila, .modal-dueno-header) {
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--borde-tarjeta);
+}
+body .modal-titulo { font-size: 19px; font-weight: 700; color: var(--color-nav); }
+body :is(.close-btn, .btn-cerrar) {
+  width: 36px;
+  height: 36px;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--color-texto-suave);
+}
+body :is(.close-btn, .btn-cerrar):hover { background: var(--fondo-suave); color: var(--color-nav); }
+body .modal-pie { gap: 10px; margin-top: 22px; }
+body .btn-eliminar { border-radius: 12px; }
+body .modal-caja .campo input,
+body .modal-caja .campo select,
+body .modal-caja .campo textarea,
+body .modal-dueno .form-input {
+  border-color: rgba(26, 111, 168, 0.22);
+  background: #fff;
+  border-radius: 12px;
+}
+body .hf-aviso { border-radius: 14px; }
+
+body .vp-toast {
+  padding: 14px 20px;
+  border-left: 5px solid var(--color-acento-claro);
+  border-radius: 14px;
+  background: var(--azul-profundo);
+  font-weight: 600;
+  box-shadow: 0 14px 34px rgba(8, 40, 68, 0.3);
+}
+body .vp-toast.ok { background: #14665a; border-left-color: var(--color-secundario); }
+body .vp-toast.error { background: #8f2424; border-left-color: #ffb3b3; }
+
+body .vp-confirm-overlay { background: var(--velo-modal); backdrop-filter: blur(4px); }
+body .vp-confirm { padding: 28px; border-radius: 24px; }
+body .vp-confirm h3 { font-size: 20px; color: var(--color-nav); }
+body .vp-confirm-actions button { padding: 10px 20px; border-radius: 12px; font-weight: 700; }
+body .vp-confirm-cancel { background: var(--fondo-suave); color: var(--color-nav); }
+body .vp-confirm-ok { background: var(--color-acento-fuerte); }
+body .vp-confirm-ok.peligro { background: var(--nivel-rojo); }
+
+body .emerg-panel { border-radius: 22px; }
+body .emerg-llamar { border-radius: 14px; }
+
+@media (max-width: 640px) {
+  body :is(.modal-dueno, .modal-caja) { padding: 20px 18px 16px; border-radius: 22px; }
+  body .emerg-panel { border-radius: 22px 22px 0 0; }
+}

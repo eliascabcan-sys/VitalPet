@@ -1,0 +1,29 @@
+.cm { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin-bottom: 12px; }
+.cm-enc { text-align: center; font-size: 14px; font-weight: 700; color: var(--color-texto-suave, #5b6770); padding: 4px 0; }
+.cm-vacio { min-height: 52px; }
+.cm-dia {
+  position: relative; min-height: 56px; padding: 6px 4px 8px; border-radius: 8px; border: 1px solid #d5dde3;
+  background: #fff; font: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.cm-dia:hover { border-color: var(--color-primario, #2a8fa3); }
+.cm-dia.con { background: rgba(42,143,163,.08); }
+.cm-dia.alto { background: var(--nivel-amarillo-fondo, #fff6d6); }
+.cm-dia.lleno { background: var(--nivel-rojo-fondo, #fde4e1); }
+.cm-dia.cerrado { background: #eef1f3; color: #6b7780; }
+.cm-dia.hoy .cm-num { background: var(--color-nav, #1A6FA8); color: #fff; border-radius: 999px; padding: 0 7px; }
+.cm-dia.sel { outline: 3px solid var(--color-primario, #2a8fa3); outline-offset: -1px; }
+.cm-num { font-size: 15px; font-weight: 600; }
+.cm-cuenta { font-size: 14px; font-weight: 700; color: var(--color-nav, #1A6FA8); }
+.cm-barra { position: absolute; left: 6px; right: 6px; bottom: 4px; height: 4px; background: #e3e8ec; border-radius: 4px; overflow: hidden; }
+.cm-barra i { display: block; height: 100%; background: var(--color-primario, #2a8fa3); }
+.cm-dia.lleno .cm-barra i { background: var(--nivel-rojo, #c0392b); }
+.cm-leyenda { display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; color: var(--color-texto-suave, #5b6770); margin-bottom: 12px; }
+.cm-leyenda span::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1px solid #c3ccd2; }
+.cm-leyenda .l-con::before { background: rgba(42,143,163,.15); }
+.cm-leyenda .l-alto::before { background: var(--nivel-amarillo-fondo, #fff6d6); }
+.cm-leyenda .l-lleno::before { background: var(--nivel-rojo-fondo, #fde4e1); }
+.cm-leyenda .l-cerrado::before { background: #eef1f3; }
+@media (max-width: 640px) { .cm { gap: 2px; } .cm-dia { min-height: 52px; padding: 4px 1px 8px; } }
+
+.cm-asignar { font-size: 11px; font-weight: 700; color: #fff; background: #c2410c; border-radius: 999px; padding: 1px 6px; margin-top: 2px; white-space: nowrap; }
+.cm-leyenda .l-asignar::before { background: #c2410c; }

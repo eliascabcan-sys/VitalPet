@@ -1,0 +1,80 @@
+/* =================================================================
+   Autorizaciones (dueño). Una sola columna con 3 bloques:
+   estado -> acudientes -> consentimiento. Reutiliza los tokens y las
+   clases .form-* de dueno.css para verse igual que el resto del panel.
+================================================================= */
+.aut-columna { display: flex; flex-direction: column; gap: 18px; max-width: 720px; }
+
+.aut-bloque {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-suave);
+  padding: 18px 20px;
+}
+.aut-bloque-titulo {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  font-size: 15px; font-weight: 700; color: var(--color-nav);
+  margin-bottom: 12px;
+}
+.aut-bloque-titulo i { margin-right: 6px; }
+.aut-texto { font-size: 13.5px; color: var(--color-texto-suave); line-height: 1.55; margin: 0; }
+
+/* Estado: icono + mensaje + etiqueta */
+.aut-estado { display: flex; align-items: flex-start; gap: 14px; }
+.aut-estado-icono {
+  width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.aut-estado.ok        .aut-estado-icono { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.aut-estado.pendiente .aut-estado-icono { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.aut-estado.neutro    .aut-estado-icono { background: var(--nivel-azul-fondo);    color: var(--nivel-azul-texto); }
+.aut-estado-titulo { font-size: 15px; font-weight: 700; color: var(--color-texto); margin-bottom: 4px; }
+.aut-pendientes { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; color: var(--nivel-naranja-texto); }
+
+/* Lista de acudientes */
+.aut-lista { display: flex; flex-direction: column; gap: 10px; }
+.aut-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  border: 1.5px solid rgba(0, 0, 0, 0.08); border-radius: 12px; padding: 12px 14px;
+}
+.aut-item-nombre { font-size: 14.5px; font-weight: 700; color: var(--color-texto); }
+.aut-item-detalle { font-size: 12.5px; color: var(--color-texto-suave); margin-top: 2px; }
+.aut-vacio { font-size: 13.5px; color: var(--color-texto-gris); padding: 6px 0; }
+
+.aut-etiqueta {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+}
+.aut-etiqueta.ok        { background: var(--nivel-verde-fondo);   color: var(--nivel-verde-texto); }
+.aut-etiqueta.pendiente { background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto); }
+.aut-etiqueta.neutro    { background: var(--nivel-azul-fondo);    color: var(--nivel-azul-texto); }
+
+.aut-btn-texto {
+  background: none; border: none; cursor: pointer; font-family: var(--fuente);
+  font-size: 13px; font-weight: 600; color: var(--nivel-rojo-texto); padding: 6px 8px;
+  border-radius: var(--radio-boton); min-height: var(--tap-min);
+}
+.aut-btn-texto:hover { background: var(--nivel-rojo-fondo); }
+
+/* Formulario de acudiente: va dentro del bloque, sin tarjeta propia */
+.aut-form { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(0, 0, 0, 0.06); }
+.aut-form-botones { display: flex; gap: 10px; flex-wrap: wrap; }
+.aut-btn-secundario {
+  background: #fff; color: var(--color-texto-suave); font-family: var(--fuente);
+  border: 1.5px solid rgba(0, 0, 0, 0.15); border-radius: var(--radio-boton);
+  padding: 9px 18px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+}
+
+/* Consentimiento */
+.aut-consentimiento-texto {
+  background: var(--color-fondo); border-radius: 12px; padding: 12px 14px;
+  font-size: 13.5px; line-height: 1.55; color: var(--color-texto); margin-bottom: 14px;
+}
+.aut-check { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; margin: 12px 0 14px; cursor: pointer; }
+.aut-check input { margin-top: 3px; width: 16px; height: 16px; }
+
+@media (max-width: 640px) {
+  .aut-item { flex-direction: column; align-items: flex-start; }
+  .aut-form .form-row-2 { grid-template-columns: 1fr; }
+}

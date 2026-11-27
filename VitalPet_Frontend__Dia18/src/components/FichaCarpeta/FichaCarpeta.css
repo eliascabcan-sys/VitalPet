@@ -1,0 +1,111 @@
+/* =================================================================
+   Ficha del paciente como "carpeta": encabezado, datos clave, pestañas
+   y la pestaña Resumen. Prefijo "fc-". Los botones .av-btn vienen de
+   AgendaVet.css (la página que usa estos componentes lo importa).
+================================================================= */
+
+/* ---------- Encabezado ---------- */
+.fc-cabecera {
+  background: #fff; border: 1px solid rgba(0, 0, 0, 0.06); border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-suave); padding: 16px 20px 18px; margin-bottom: 16px;
+}
+.fc-volver {
+  display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px;
+  color: var(--color-nav); font-weight: 600; font-size: 13px; text-decoration: none;
+}
+.fc-fila-principal { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.fc-avatar {
+  width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0; background: var(--color-fondo);
+  display: flex; align-items: center; justify-content: center; font-size: 34px;
+}
+.fc-identidad { flex: 1; min-width: 220px; }
+.fc-nombre { margin: 0; font-size: 26px; line-height: 1.15; color: var(--color-nav); }
+.fc-detalles { font-size: 14px; color: var(--color-texto-suave); margin-top: 2px; }
+.fc-dueno { font-size: 13.5px; color: var(--color-texto-suave); margin-top: 8px; }
+.fc-dueno strong { color: var(--color-texto); }
+.fc-dueno a { color: var(--color-primario-fuerte); font-weight: 600; text-decoration: none; }
+.fc-aviso {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 12px;
+  border-radius: 20px; background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto);
+  font-size: 12.5px; font-weight: 600;
+}
+.fc-accion { flex-shrink: 0; }
+
+/* ---------- Datos clave ---------- */
+.fc-datos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.fc-dato { background: var(--color-fondo); border-radius: 12px; padding: 10px 14px; display: flex; flex-direction: column; gap: 2px; }
+.fc-dato-et { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-texto-suave); }
+.fc-dato-val { font-size: 15px; font-weight: 700; color: var(--color-texto); }
+.fc-dato-val.tenue { color: var(--color-texto-gris); font-weight: 600; }
+.fc-dato.atencion { background: var(--nivel-naranja-fondo); }
+.fc-dato.atencion .fc-dato-val { color: var(--nivel-naranja-texto); }
+.fc-dato.ok { background: var(--nivel-verde-fondo); }
+.fc-dato.ok .fc-dato-val { color: var(--nivel-verde-texto); }
+@media (max-width: 760px) { .fc-datos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- Pestañas ---------- */
+.fc-tabs {
+  display: flex; gap: 2px; overflow-x: auto; border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 14px; position: sticky; top: 0; z-index: 3; background: var(--color-fondo); padding-top: 4px;
+  scrollbar-width: thin;
+}
+.fc-tab {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; cursor: pointer;
+  padding: 10px 14px; margin-bottom: -2px; border: none; border-bottom: 3px solid transparent; background: none;
+  font-family: var(--fuente); font-size: 14px; font-weight: 600; color: var(--color-texto-suave);
+  transition: var(--transicion);
+}
+.fc-tab:hover { color: var(--color-nav); }
+.fc-tab.activa { color: var(--color-nav); border-bottom-color: var(--color-nav); }
+.fc-tab-n {
+  font-size: 11px; font-weight: 700; min-width: 20px; text-align: center; padding: 1px 7px;
+  border-radius: 20px; background: #e3e8ec; color: var(--color-texto-suave);
+}
+.fc-tab.activa .fc-tab-n { background: var(--nivel-azul-fondo); color: var(--nivel-azul-texto); }
+.fc-tab-punto { width: 8px; height: 8px; border-radius: 50%; background: var(--nivel-naranja); }
+
+/* ---------- Pestaña Resumen ---------- */
+.fc-resumen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.fc-ancha { grid-column: 1 / -1; }
+@media (max-width: 900px) { .fc-resumen { grid-template-columns: minmax(0, 1fr); } }
+
+.fc-tarjeta {
+  background: #fff; border: 1px solid rgba(0, 0, 0, 0.06); border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-suave); padding: 16px 18px;
+}
+.fc-tarjeta-tit { margin: 0 0 10px; font-size: 15px; font-weight: 700; color: var(--color-nav); }
+.fc-ok { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; color: var(--nivel-verde-texto); font-weight: 600; }
+.fc-vacio { margin: 0; font-size: 14px; color: var(--color-texto-gris); }
+.fc-linea { margin: 0 0 6px; font-size: 14px; }
+.fc-et { color: var(--color-texto-suave); font-weight: 600; }
+.fc-control { margin: 12px 0 0; padding: 8px 12px; border-radius: 10px; background: var(--nivel-azul-fondo); color: var(--nivel-azul-texto); font-size: 13px; }
+
+.fc-avisos { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.fc-avisos button {
+  width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; cursor: pointer;
+  padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0, 0, 0, 0.08); background: #fff;
+  font-family: var(--fuente); transition: var(--transicion);
+}
+.fc-avisos button:hover { border-color: var(--color-primario); background: var(--color-fondo); }
+.fc-avisos .fc-aviso-info {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px;
+  border: 1px dashed rgba(0, 0, 0, 0.15); background: #fff;
+}
+.fc-avisos button > i:first-child, .fc-aviso-info > i:first-child {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0; font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--nivel-naranja-fondo); color: var(--nivel-naranja-texto);
+}
+.fc-avisos span { flex: 1; display: flex; flex-direction: column; min-width: 0; font-size: 14px; color: var(--color-texto); }
+.fc-avisos small { font-size: 12.5px; color: var(--color-texto-suave); margin-top: 2px; }
+.fc-flecha { color: var(--color-texto-gris); }
+
+/* ---------- Dentro de las pestañas ---------- */
+.fc-subtitulo { font-size: 16px; font-weight: 700; color: var(--color-nav); margin: 18px 0 8px; }
+.fc-subtitulo:first-child { margin-top: 0; }
+.fc-subtitulo small { font-weight: 500; color: var(--color-texto-suave); }
+
+@media (max-width: 640px) {
+  .fc-fila-principal { flex-direction: column; }
+  .fc-accion { width: 100%; justify-content: center; }
+}

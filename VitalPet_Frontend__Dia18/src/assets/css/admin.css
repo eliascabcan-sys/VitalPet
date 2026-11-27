@@ -1,0 +1,624 @@
+/* ============================================
+   VITALPET - Admin CSS
+   Autor: Equipo ADSO - SENA
+   Usa variables de tokens.css
+   ============================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fuente);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+/* El menú lateral vive solo en components/NavBar/NavBar.css */
+
+/* ── SECCIONES ── */
+.seccion { display: none; }
+.seccion.activa { display: block; }
+
+.sec-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 22px; gap: 12px;
+}
+
+.sec-titulo    { font-size: 20px; font-weight: 700; color: var(--color-nav); }
+.sec-subtitulo { font-size: 12px; color: var(--color-texto-suave); margin-top: 2px; }
+
+/* ── STATS ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.stat {
+  background: #fff;
+  border-radius: var(--radio-tarjeta);
+  padding: 16px;
+  box-shadow: var(--sombra-suave);
+  display: flex; align-items: center; gap: 14px;
+  transition: var(--transicion);
+}
+.stat:hover { transform: translateY(-2px); box-shadow: var(--sombra-media); }
+
+.stat-icono {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: rgba(42,143,163,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--color-primario-fuerte); flex-shrink: 0;
+}
+.stat-icono.verde  { background: rgba(109,214,194,0.15); color: #2a9e8a; }
+.stat-icono.acento { background: rgba(244,132,95,0.15);  color: var(--color-acento); }
+
+.stat-label { font-size: 11px; color: var(--color-texto-suave); margin-bottom: 3px; }
+.stat-valor { font-size: 24px; font-weight: 700; color: var(--color-primario-fuerte); line-height: 1; }
+.stat-valor.verde  { color: var(--nivel-verde-texto); }
+.stat-valor.acento { color: var(--nivel-naranja-texto); }
+
+/* ── TOOLBAR ── */
+.toolbar {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+
+.buscador { flex: 1; min-width: 180px; position: relative; }
+
+.buscador i {
+  position: absolute; left: 11px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px; color: var(--color-texto-suave);
+  pointer-events: none;
+}
+
+.buscador input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  font-size: 13px; font-family: var(--fuente);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--radio-boton);
+  background: #fff; color: var(--color-texto);
+  outline: none; transition: var(--transicion);
+}
+.buscador input:focus { border-color: var(--color-primario); }
+
+select.filtro {
+  padding: 9px 12px;
+  font-size: 13px; font-family: var(--fuente);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--radio-boton);
+  background: #fff; color: var(--color-texto);
+  outline: none; cursor: pointer;
+}
+
+.btn-nuevo {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--color-acento-fuerte); color: #fff;
+  border: none; border-radius: var(--radio-boton);
+  padding: 9px 16px;
+  font-size: 13px; font-weight: 600; font-family: var(--fuente);
+  cursor: pointer; white-space: nowrap;
+  transition: var(--transicion);
+}
+.btn-nuevo:hover { filter: brightness(0.9); }
+
+.conteo { font-size: 12px; color: var(--color-texto-suave); margin-bottom: 12px; }
+
+/* ── GRID MASCOTAS ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radio-tarjeta);
+  padding: 16px 14px 12px;
+  transition: var(--transicion);
+}
+.card:hover { border-color: var(--color-primario); box-shadow: var(--sombra-suave); transform: translateY(-3px); }
+
+.card-top {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 10px;
+}
+
+.pet-avatar {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: rgba(42,143,163,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+
+.dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 4px; }
+.dot.activo   { background: #2a9e8a; }
+.dot.inactivo { background: #B4B2A9; }
+
+.pet-nombre  { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.pet-especie { font-size: 12px; color: var(--color-texto-suave); margin-bottom: 8px; }
+
+.pet-dato {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 12px; color: var(--color-texto-suave); margin-bottom: 4px;
+}
+.pet-dato i { font-size: 13px; }
+
+.dueno-tag {
+  font-size: 11px; font-weight: 600;
+  color: var(--color-nav);
+  background: rgba(42,143,163,0.1);
+  padding: 3px 8px; border-radius: 4px;
+  display: inline-flex; align-items: center; gap: 3px;
+  margin: 6px 0 10px;
+}
+
+.card-acciones {
+  display: flex; gap: 6px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 10px;
+}
+
+.btn-accion {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  gap: 4px; padding: 7px 4px;
+  border-radius: var(--radio-boton);
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #fff; cursor: pointer;
+  font-size: 11px; font-family: var(--fuente);
+  color: var(--color-texto-suave);
+  transition: var(--transicion);
+}
+.btn-accion i { font-size: 14px; }
+.btn-accion.editar:hover    { background: rgba(42,143,163,0.1); color: var(--color-nav); border-color: var(--color-primario); }
+.btn-accion.historial:hover { background: rgba(109,214,194,0.15); color: #1a7a6a; border-color: #2a9e8a; }
+.btn-accion.eliminar:hover  { background: #FCEBEB; color: #A32D2D; border-color: #F09595; }
+
+/* ── CITAS ── */
+.citas-lista { display: flex; flex-direction: column; gap: 10px; }
+
+.cita-fila {
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radio-tarjeta);
+  padding: 14px 16px;
+  display: flex; align-items: center; gap: 14px;
+  transition: var(--transicion);
+}
+.cita-fila:hover { border-color: var(--color-primario); box-shadow: var(--sombra-suave); }
+
+.cita-fecha-bloque {
+  min-width: 50px; text-align: center;
+  background: rgba(42,143,163,0.08);
+  border-radius: 8px; padding: 8px 6px; flex-shrink: 0;
+}
+.cita-dia  { font-size: 20px; font-weight: 700; color: var(--color-nav); line-height: 1; }
+.cita-mes  { font-size: 10px; color: var(--color-texto-suave); text-transform: uppercase; }
+.cita-hora { font-size: 11px; color: var(--color-primario-fuerte); font-weight: 600; margin-top: 2px; }
+
+.cita-info    { flex: 1; min-width: 0; }
+.cita-mascota { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+.cita-motivo  { font-size: 12px; color: var(--color-texto-suave); }
+
+.chip {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.chip.pendiente  { background: rgba(249,115,22,0.15); color: #c2570c; }
+.chip.confirmada { background: rgba(42,143,163,0.15);  color: var(--color-nav); }
+.chip.completada { background: rgba(109,214,194,0.2);  color: #1a7a6a; }
+.chip.cancelada  { background: rgba(180,178,169,0.2);  color: #555; }
+
+.btn-ico {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(0,0,0,0.10);
+  background: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: var(--color-texto-suave);
+  transition: var(--transicion); flex-shrink: 0;
+}
+.btn-ico:hover      { background: var(--color-fondo); color: var(--color-nav); }
+.btn-ico.rojo:hover { background: #FCEBEB; color: #A32D2D; border-color: #F09595; }
+
+/* ── HISTORIAL ── */
+.hist-lista { display: flex; flex-direction: column; gap: 10px; }
+
+.hist-fila {
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radio-tarjeta);
+  padding: 16px;
+  transition: var(--transicion);
+}
+.hist-fila:hover { border-color: var(--color-primario); box-shadow: var(--sombra-suave); }
+
+.hist-top {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;
+}
+.hist-mascota-label { font-size: 14px; font-weight: 700; color: var(--color-nav); display: flex; align-items: center; gap: 6px; }
+.hist-fecha-label   { font-size: 11px; color: var(--color-texto-suave); }
+
+.hist-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.hist-campo label {
+  font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-texto-suave);
+  font-weight: 600; display: block; margin-bottom: 3px;
+}
+.hist-campo p { font-size: 13px; line-height: 1.4; }
+
+/* ── VACÍO ── */
+.vacio {
+  text-align: center; padding: 50px 20px;
+  color: var(--color-texto-suave); font-size: 13px;
+  grid-column: 1 / -1;
+}
+.vacio i { font-size: 36px; display: block; margin: 0 auto 10px; color: var(--color-primario-fuerte); opacity: 0.35; }
+
+/* ── MODALES ── */
+.modal-fondo {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45); z-index: 100;
+  align-items: center; justify-content: center; padding: 16px;
+}
+.modal-fondo.abierto { display: flex; }
+
+.modal-caja {
+  background: #fff;
+  border-radius: var(--radio-tarjeta);
+  padding: 24px 22px 18px;
+  width: 380px; max-width: 100%;
+  box-shadow: var(--sombra-fuerte);
+  max-height: 90vh; overflow-y: auto;
+}
+
+.modal-titulo-fila {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 18px;
+}
+.modal-titulo { font-size: 15px; font-weight: 700; color: var(--color-nav); }
+
+.btn-cerrar {
+  background: none; border: none; cursor: pointer;
+  color: var(--color-texto-suave); font-size: 18px;
+  display: flex; align-items: center;
+}
+.btn-cerrar:hover { color: var(--color-texto); }
+
+.campo { margin-bottom: 12px; }
+.campo label { font-size: 12px; color: var(--color-texto-suave); font-weight: 500; display: block; margin-bottom: 5px; }
+
+.campo input, .campo select, .campo textarea {
+  width: 100%; padding: 9px 11px;
+  font-size: 13px; font-family: var(--fuente);
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--radio-boton);
+  background: var(--color-fondo); color: var(--color-texto);
+  outline: none; transition: var(--transicion);
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus {
+  border-color: var(--color-primario); background: #fff;
+}
+.campo textarea { resize: vertical; min-height: 65px; line-height: 1.4; }
+
+.campo-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+
+.modal-pie { display: flex; gap: 8px; margin-top: 18px; }
+
+.btn-cancelar {
+  flex: 1; padding: 10px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  border-radius: var(--radio-boton);
+  background: #fff; color: var(--color-texto-suave);
+  cursor: pointer; font-size: 13px; font-family: var(--fuente);
+  transition: var(--transicion);
+}
+.btn-cancelar:hover { background: var(--color-fondo); }
+
+.btn-guardar {
+  flex: 2; padding: 10px;
+  border: none; border-radius: var(--radio-boton);
+  background: var(--color-primario-fuerte); color: #fff;
+  cursor: pointer; font-size: 13px; font-weight: 600; font-family: var(--fuente);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  transition: var(--transicion);
+}
+.btn-guardar:hover { background: var(--color-nav); }
+
+.btn-eliminar {
+  flex: 2; padding: 10px;
+  border: none; border-radius: var(--radio-boton);
+  background: #A32D2D; color: #fff;
+  cursor: pointer; font-size: 13px; font-weight: 600; font-family: var(--fuente);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  transition: var(--transicion);
+}
+.btn-eliminar:hover { background: #7A1F1F; }
+
+.del-texto { font-size: 14px; line-height: 1.5; margin-bottom: 6px; }
+.del-sub   { font-size: 13px; color: var(--color-texto-suave); line-height: 1.5; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--color-nav); color: #fff;
+  padding: 11px 18px; border-radius: var(--radio-boton);
+  font-size: 13px; font-weight: 500;
+  box-shadow: var(--sombra-media);
+  z-index: 300;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.ok   { background: #1a7a6a; }
+.toast.err  { background: #A32D2D; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .hist-cols { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
+
+/* ======================================================
+   HISTORIAL CLÍNICO Y VENTAS - ORGANIZACIÓN
+   ====================================================== */
+
+.hist-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.hist-card {
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radio-tarjeta);
+    padding: 18px;
+    transition: var(--transicion);
+    box-shadow: var(--sombra-suave);
+}
+
+.hist-card:hover {
+    border-color: var(--color-primario);
+    box-shadow: var(--sombra-media);
+}
+
+/* Encabezado */
+
+.hist-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 13px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+.hist-fecha {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-texto-suave);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.hist-fecha i {
+    color: var(--color-primario-fuerte);
+    font-size: 15px;
+}
+
+.hist-mascota {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-nav);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.hist-mascota i {
+    color: var(--color-primario-fuerte);
+    font-size: 16px;
+}
+
+/* Campos del historial */
+
+.hist-cols {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+/* Cuando hay campos individuales */
+
+.hist-card > .hist-campo {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 11px 13px;
+    background: var(--color-fondo);
+    border-radius: 9px;
+    border-left: 3px solid var(--color-primario);
+}
+
+.hist-card > .hist-campo:last-of-type {
+    margin-bottom: 0;
+}
+
+.hist-campo {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.hist-campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.hist-campo p {
+    margin: 0;
+    color: var(--color-texto);
+    font-size: 13px;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+/* Campos dentro del grid */
+
+.hist-cols .hist-campo {
+    min-width: 0;
+    padding: 11px 13px;
+    background: var(--color-fondo);
+    border-radius: 9px;
+    border-left: 3px solid var(--color-primario);
+}
+
+/* Acciones */
+
+.hist-acciones {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0,0,0,0.07);
+}
+
+.hist-acciones button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 12px;
+    border-radius: var(--radio-boton);
+    border: 1.5px solid rgba(0,0,0,0.10);
+    background: #fff;
+    color: var(--color-texto-suave);
+    cursor: pointer;
+    font-family: var(--fuente);
+    font-size: 11px;
+    transition: var(--transicion);
+}
+
+.hist-acciones button:hover {
+    background: rgba(42,143,163,0.10);
+    color: var(--color-nav);
+    border-color: var(--color-primario);
+}
+
+.hist-acciones button.btn-del:hover {
+    background: #FCEBEB;
+    color: #A32D2D;
+    border-color: #F09595;
+}
+
+/* Valor de venta */
+
+.venta-valor {
+    font-size: 15px !important;
+    font-weight: 700;
+    color: #2a9e8a !important;
+}
+
+/* Tarjeta de venta */
+
+.venta-card {
+    overflow: hidden;
+}
+
+.venta-card .hist-cols {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+
+@media (max-width: 1024px) {
+
+    .hist-cols,
+    .venta-card .hist-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .hist-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .hist-mascota {
+        text-align: left;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .hist-card {
+        padding: 14px;
+    }
+
+    .hist-acciones {
+        justify-content: stretch;
+    }
+
+    .hist-acciones button {
+        flex: 1;
+    }
+}
+
+.modal-caja.modal-historia { width: 640px; }
+.hf-titulo {
+  font-size: 12px; font-weight: 700; color: var(--color-nav);
+  text-transform: uppercase; letter-spacing: .04em;
+  margin: 16px 0 8px; padding-top: 10px; border-top: 1px solid #e3e8ec;
+}
+
+/* Aviso de la regla "mascota nueva" en el formulario de historia clínica */
+.hf-aviso {
+  background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a8a;
+  border-radius: 10px; padding: 10px 12px; margin-bottom: 14px;
+  font-size: 14px; line-height: 1.4;
+}
+.hf-aviso i { margin-right: 4px; }
+
+/* Agenda: citas sin veterinario dentro de cada día/franja del calendario */
+.agenda-por-asignar { margin: 6px 0 4px; padding: 8px 10px; border: 1px dashed #c2410c; border-radius: 10px; background: #fff7ed; }
+.agenda-por-asignar-titulo { font-size: 13px; font-weight: 700; color: #9a3412; margin-bottom: 6px; }
+.btn-accion i { margin-right: 3px; }
+/* Botón "Ficha" en la tarjeta de Pacientes */
+.btn-ficha { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; border-radius: 8px;
+  border: 1px solid var(--color-nav, #1A6FA8); color: var(--color-nav, #1A6FA8); font-size: 13px;
+  font-weight: 600; text-decoration: none; margin-right: auto; }
+.cita-fila.pendiente { border-left: 5px solid #f97316; }

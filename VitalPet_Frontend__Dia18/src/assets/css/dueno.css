@@ -1,0 +1,482 @@
+/* ============================================
+   BASE
+============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--fuente);
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    min-height: 100vh;
+    font-size: 14px;
+}
+
+/* El menú lateral y el layout viven en components/NavBar y layouts/MainLayout */
+
+/* ============================================
+   SECTIONS
+============================================ */
+.section { display: none; }
+.section.active { display: block; }
+
+.section-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 22px; gap: 12px; flex-wrap: wrap;
+}
+.page-title { font-size: 20px; font-weight: 700; color: var(--color-nav); margin-bottom: 2px; }
+.page-sub   { font-size: 12px; color: var(--color-texto-suave); }
+
+/* ============================================
+   BANNER VETERINARIA (inicio)
+============================================ */
+.vet-banner {
+    background: linear-gradient(135deg, var(--color-nav) 0%, var(--color-primario-fuerte) 100%);
+    border-radius: var(--radio-tarjeta);
+    padding: 20px 22px;
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 22px;
+    box-shadow: var(--sombra-media);
+}
+.vet-banner-icon {
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 24px; flex-shrink: 0;
+}
+.vet-banner-info { flex: 1; min-width: 0; }
+.vet-banner-nombre { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+.vet-banner-detalle { font-size: 12px; color: #fff; display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }
+.vet-banner-badge {
+    margin-top: 7px;
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.18);
+    color: #fff; font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+}
+
+/* ============================================
+   STATS RÁPIDOS
+============================================ */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin-bottom: 22px;
+}
+.stat {
+    background: #fff;
+    border-radius: var(--radio-tarjeta);
+    padding: 16px 18px;
+    box-shadow: var(--sombra-suave);
+    display: flex; align-items: center; gap: 14px;
+    transition: var(--transicion);
+}
+.stat:hover { transform: translateY(-2px); box-shadow: var(--sombra-media); }
+.stat-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: rgba(42,143,163,0.12);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-primario-fuerte); font-size: 20px; flex-shrink: 0;
+}
+.stat-icon.verde  { background: rgba(109,214,194,0.15); color: #3aab95; }
+.stat-icon.acento { background: rgba(244,132,95,0.15);  color: var(--color-acento); }
+.stat-label  { font-size: 11px; color: var(--color-texto-suave); margin-bottom: 3px; }
+.stat-value  { font-size: 24px; font-weight: 700; color: var(--color-primario-fuerte); line-height: 1; }
+.stat-value.verde { color: var(--nivel-verde-texto); }
+.stat-value.acento { color: var(--nivel-naranja-texto); }
+
+/* ============================================
+   CITA PRÓXIMA
+============================================ */
+.cita-card {
+    background: #fff;
+    border-radius: var(--radio-tarjeta);
+    padding: 16px 18px;
+    box-shadow: var(--sombra-suave);
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 22px;
+    border-left: 4px solid var(--color-primario);
+}
+.cita-icono {
+    width: 44px; height: 44px;
+    background: rgba(42,143,163,0.10);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-primario-fuerte); font-size: 22px; flex-shrink: 0;
+}
+.cita-info  { flex: 1; min-width: 0; }
+.cita-titulo { font-size: 15px; font-weight: 700; color: var(--color-texto); margin-bottom: 4px; }
+.cita-detalle {
+    font-size: 12px; color: var(--color-texto-suave);
+    display: flex; align-items: center; gap: 5px; margin-bottom: 2px;
+}
+.cita-vacia {
+    background: #fff;
+    border-radius: var(--radio-tarjeta);
+    padding: 20px;
+    text-align: center;
+    color: var(--color-texto-suave);
+    font-size: 13px;
+    margin-bottom: 22px;
+    box-shadow: var(--sombra-suave);
+}
+.estado-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 600;
+    padding: 3px 9px; border-radius: 20px; margin-top: 5px;
+}
+.estado-badge.pendiente  { background: rgba(244,132,95,0.15); color: var(--nivel-naranja-texto); }
+.estado-badge.confirmada { background: rgba(42,143,163,0.15);  color: var(--color-nav); }
+.estado-badge.completada { background: rgba(109,214,194,0.20); color: #2a7a6e; }
+
+/* ============================================
+   GRID MASCOTAS (inicio y mis-mascotas)
+============================================ */
+.grid-mascotas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 14px;
+}
+.mascota-card {
+    background: #fff;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radio-tarjeta);
+    padding: 16px 14px 14px;
+    text-align: center;
+    transition: var(--transicion);
+}
+.mascota-card:hover {
+    border-color: var(--color-primario);
+    box-shadow: var(--sombra-suave);
+    transform: translateY(-3px);
+}
+.mascota-avatar { font-size: 36px; margin-bottom: 8px; }
+.mascota-nombre { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--color-texto); }
+.mascota-especie { font-size: 12px; color: var(--color-texto-suave); margin-bottom: 6px; }
+.mascota-dato {
+    font-size: 11px; color: var(--color-texto-suave);
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    margin-bottom: 10px;
+}
+.btn-historial {
+    width: 100%;
+    background: rgba(42,143,163,0.08);
+    color: var(--color-nav);
+    border: 1.5px solid rgba(42,143,163,0.20);
+    border-radius: var(--radio-boton);
+    padding: 7px 10px;
+    font-size: 12px; font-weight: 600; font-family: var(--fuente);
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; gap: 5px;
+    transition: var(--transicion);
+}
+.btn-historial:hover { background: var(--color-primario-fuerte); color: #fff; border-color: var(--color-primario); }
+
+/* ============================================
+   TOOLBAR
+============================================ */
+.toolbar {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; flex-wrap: wrap;
+}
+.btn-nuevo {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--color-acento-fuerte); color: #fff;
+    border: none; border-radius: var(--radio-boton);
+    padding: 9px 18px; font-size: 13px; font-weight: 600;
+    font-family: var(--fuente); cursor: pointer;
+    white-space: nowrap; transition: var(--transicion);
+}
+.btn-nuevo:hover { filter: brightness(0.9); }
+
+/* ============================================
+   TABLA DE CITAS
+============================================ */
+.citas-list { display: flex; flex-direction: column; gap: 10px; }
+.cita-row {
+    background: #fff;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radio-tarjeta);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 14px;
+    transition: var(--transicion);
+}
+.cita-row:hover { border-color: var(--color-primario); box-shadow: var(--sombra-suave); }
+.cita-fecha-block {
+    min-width: 52px; text-align: center;
+    background: rgba(42,143,163,0.08);
+    border-radius: 8px; padding: 8px 6px; flex-shrink: 0;
+}
+.cita-dia  { font-size: 20px; font-weight: 700; color: var(--color-nav); line-height: 1; }
+.cita-mes  { font-size: 10px; color: var(--color-texto-suave); text-transform: uppercase; letter-spacing: 0.04em; }
+.cita-hora { font-size: 11px; color: var(--color-primario-fuerte); font-weight: 600; margin-top: 2px; }
+.cita-row-info { flex: 1; min-width: 0; }
+.cita-mascota-nombre {
+    font-size: 14px; font-weight: 700; color: var(--color-texto);
+    margin-bottom: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cita-motivo { font-size: 12px; color: var(--color-texto-suave); }
+/* Botones de icono de la cita (reprogramar / cancelar) */
+.cita-acciones { display: flex; gap: 6px; flex-shrink: 0; }
+.btn-icono {
+    width: 34px; height: 34px;
+    border-radius: 8px; border: 1.5px solid rgba(0,0,0,0.10);
+    background: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: var(--color-texto-suave);
+    transition: var(--transicion); flex-shrink: 0;
+}
+.btn-icono:hover { background: var(--color-fondo); color: var(--color-nav); }
+.btn-icono-danger:hover { background: #FCEBEB; color: #A32D2D; border-color: #F09595; }
+.btn-icono i { font-size: 18px; }
+.badge-estado {
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px;
+    white-space: nowrap; flex-shrink: 0;
+}
+.badge-estado.pendiente  { background: rgba(249,115,22,0.15); color: #c2570c; }
+.badge-estado.confirmada { background: rgba(42,143,163,0.15);  color: var(--color-nav); }
+.badge-estado.completada { background: rgba(109,214,194,0.20); color: #2a7a6e; }
+.badge-estado.cancelada  { background: rgba(180,178,169,0.25); color: #555; }
+
+/* ============================================
+   FORMULARIO AGREGAR MASCOTA / CITA
+============================================ */
+.form-card {
+    background: #fff;
+    border-radius: var(--radio-tarjeta);
+    padding: 24px 22px;
+    box-shadow: var(--sombra-suave);
+    max-width: 560px;
+}
+.form-row { margin-bottom: 14px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-label { font-size: 12px; color: var(--color-texto-suave); margin-bottom: 5px; display: block; font-weight: 500; }
+.form-input {
+    width: 100%; padding: 9px 11px;
+    font-size: 13px; font-family: var(--fuente);
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: var(--radio-boton);
+    background: var(--color-fondo); color: var(--color-texto);
+    outline: none; transition: var(--transicion);
+}
+.form-input:focus { border-color: var(--color-primario); background: #fff; }
+.form-textarea { resize: vertical; min-height: 80px; line-height: 1.45; }
+.btn-guardar {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--color-primario-fuerte); color: #fff;
+    border: none; border-radius: var(--radio-boton);
+    padding: 11px 24px; font-size: 13px; font-weight: 600;
+    font-family: var(--fuente); cursor: pointer;
+    transition: var(--transicion);
+}
+.btn-guardar:hover { background: var(--color-nav); }
+.form-nota {
+    font-size: 11px; color: var(--color-texto-suave);
+    margin-top: 10px; line-height: 1.5;
+}
+
+/* ============================================
+   REPORTE DIARIO
+============================================ */
+.formulario-card {
+    background: #fff;
+    border-radius: var(--radio-tarjeta);
+    padding: 22px 20px;
+    box-shadow: var(--sombra-suave);
+    max-width: 600px;
+}
+.form-pregunta { margin-bottom: 18px; }
+.opciones { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 7px; }
+.opcion-btn {
+    background: var(--color-fondo); color: var(--color-texto-suave);
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 12px; font-family: var(--fuente); font-weight: 500;
+    cursor: pointer; transition: var(--transicion);
+}
+.opcion-btn:hover { border-color: var(--color-primario); color: var(--color-primario-fuerte); }
+.opcion-btn.activo {
+    background: var(--color-primario-fuerte); color: #fff;
+    border-color: var(--color-primario);
+}
+.btn-enviar {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--color-acento-fuerte); color: #fff;
+    border: none; border-radius: var(--radio-boton);
+    padding: 11px 24px; font-size: 13px; font-weight: 600;
+    font-family: var(--fuente); cursor: pointer;
+    transition: var(--transicion);
+}
+.btn-enviar:hover { filter: brightness(0.9); }
+
+/* ============================================
+   ESTADO VACÍO
+============================================ */
+.vacio {
+    text-align: center; padding: 50px 20px;
+    color: var(--color-texto-suave); font-size: 13px;
+    grid-column: 1 / -1;
+}
+.vacio i { font-size: 38px; display: block; margin: 0 auto 10px; color: var(--color-primario-fuerte); opacity: 0.35; }
+
+/* ============================================
+   MODALES
+============================================ */
+.modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 100;
+    align-items: center; justify-content: center; padding: 16px;
+}
+.modal-bg.open { display: flex; }
+.modal-dueno {
+    background: #fff; border-radius: var(--radio-tarjeta);
+    padding: 24px 22px 18px;
+    width: 480px; max-width: 100%;
+    box-shadow: var(--sombra-fuerte);
+    max-height: 90vh; overflow-y: auto;
+}
+.modal-dueno-header {
+    display: flex; align-items: center;
+    justify-content: space-between; margin-bottom: 18px;
+}
+.modal-titulo { font-size: 15px; font-weight: 700; color: var(--color-nav); }
+.close-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--color-texto-suave); font-size: 18px; padding: 0;
+    display: flex; align-items: center; transition: var(--transicion);
+}
+.close-btn:hover { color: var(--color-texto); }
+
+/* ============================================
+   TOAST
+============================================ */
+.toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--color-nav); color: #fff;
+    padding: 11px 18px; border-radius: var(--radio-boton);
+    font-size: 13px; font-weight: 500;
+    box-shadow: var(--sombra-media); z-index: 200;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none; max-width: 280px;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.ok    { background: #2a7a6e; }
+.toast.error { background: #A32D2D; }
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 1024px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .form-row-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+    .stats { grid-template-columns: 1fr 1fr; }
+    .grid-mascotas { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    .modal-dueno { padding: 18px 16px 14px; }
+
+    /* Lista de citas: el texto ocupa su propia línea y el estado + botones
+       bajan a la siguiente, en vez de aplastar la información a 15px. */
+    .cita-row { flex-wrap: wrap; row-gap: 10px; }
+    .cita-row-info { flex: 1 1 calc(100% - 80px); }
+    .cita-row .badge-estado { margin-left: 70px; }
+    .cita-row .cita-acciones { margin-left: auto; display: flex; gap: 8px; }
+    .cita-row .btn-icono { width: var(--tap-min); height: var(--tap-min); }
+}
+/* ============================================
+   [AGREGADO] TEXTOS MÁS GRANDES EN TODO EL PANEL DUEÑO
+============================================ */
+body { font-size: 16px; }
+.page-title { font-size: 24px; }
+.page-sub   { font-size: 14px; }
+.stat-label { font-size: 12.5px; }
+.stat-value { font-size: 27px; }
+.vet-banner-nombre  { font-size: 18px; }
+.vet-banner-detalle { font-size: 13.5px; }
+.vet-banner-badge   { font-size: 12px; }
+.cita-titulo  { font-size: 16px; }
+.cita-detalle { font-size: 13px; }
+.mascota-nombre  { font-size: 16px; }
+.mascota-especie { font-size: 13px; }
+.mascota-dato    { font-size: 12.5px; }
+.btn-historial   { font-size: 13px; }
+.cita-dia   { font-size: 22px; }
+.cita-mes   { font-size: 11px; }
+.cita-hora  { font-size: 12.5px; }
+.cita-mascota-nombre { font-size: 15.5px; }
+.cita-motivo { font-size: 13px; }
+.badge-estado, .estado-badge { font-size: 12px; }
+.form-label { font-size: 13.5px; }
+.form-input { font-size: 15px; padding: 10px 12px; }
+.form-textarea { line-height: 1.5; }
+.btn-guardar, .btn-enviar, .btn-nuevo { font-size: 14.5px; }
+.opcion-btn { font-size: 13.5px; padding: 8px 16px; }
+.hist-modal-fecha { font-size: 12px; }
+.hist-modal-campo label { font-size: 10.5px; }
+.hist-modal-campo p { font-size: 14.5px; }
+.hist-vacio { font-size: 14px; }
+.vacio { font-size: 14.5px; }
+.toast { font-size: 14px; }
+.modal-titulo { font-size: 17px; }
+
+/* ============================================
+   [AGREGADO] MEJORAS VISUALES DEL PANEL DUEÑO
+============================================ */
+.stat {
+    background: linear-gradient(160deg, #ffffff 0%, #f4fafb 100%);
+    border: 1px solid rgba(42,143,163,0.08);
+}
+.stat:hover { transform: translateY(-4px); box-shadow: var(--sombra-fuerte); }
+.stat-icon { box-shadow: 0 3px 10px rgba(42,143,163,0.18); }
+
+.vet-banner { box-shadow: var(--sombra-fuerte); }
+
+.mascota-card { box-shadow: var(--sombra-suave); }
+.mascota-card:hover { box-shadow: var(--sombra-media); }
+
+.cita-card { box-shadow: var(--sombra-media); }
+.cita-row { border-radius: 16px; }
+.cita-row:hover { transform: translateY(-1px); }
+
+.formulario-card, .form-card {
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.btn-guardar, .btn-enviar {
+    box-shadow: 0 4px 14px rgba(42,143,163,0.28);
+}
+.btn-enviar { box-shadow: 0 4px 14px rgba(244,132,95,0.30); }
+.btn-guardar:hover, .btn-enviar:hover {
+    transform: translateY(-2px);
+}
+
+
+.section-header {
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding-bottom: 16px;
+}
+
+
+/* Tarjeta de encuesta de seguimiento (nueva sección) */
+.seguimiento-card { margin-bottom: 14px; transition: var(--transicion); }
+.seguimiento-card .form-pregunta { margin-bottom: 0; }
+
+/* Selector de franja del día (citas del dueño: sin hora exacta) */
+.franja-opciones { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0; }
+.franja-card {
+  flex: 1 1 160px; min-height: 64px; display: flex; flex-direction: column; gap: 2px;
+  align-items: flex-start; text-align: left; padding: 10px 14px; cursor: pointer;
+  background: #fff; border: 2px solid rgba(0,0,0,0.12); border-radius: 12px;
+  font-family: inherit; color: inherit;
+}
+.franja-card small { color: var(--color-texto-suave); }
+.franja-card:hover:not(:disabled) { border-color: var(--color-primario, #2d6a4f); }
+.franja-card.sel { border-color: var(--color-primario, #2d6a4f); background: rgba(45,106,79,0.08); }
+.franja-card:disabled { opacity: 0.5; cursor: not-allowed; background: #f3f4f6; }
+.franja-ayuda { font-size: 13px; color: var(--color-texto-suave); margin: 4px 0; }
+.cita-row.pendiente { border-left: 5px solid #f97316; }

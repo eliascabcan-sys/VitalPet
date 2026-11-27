@@ -1,0 +1,17 @@
+/* Alertas del veterinario (VeterinarioAlertasPage.tsx) */
+.alerta-fila { border-left: 5px solid rgba(180, 178, 169, 0.6); }
+.alerta-rojo     { border-left-color: #a32d2d; }
+.alerta-naranja  { border-left-color: #f4845f; }
+.alerta-amarillo { border-left-color: #b8942a; }
+.alerta-verde    { border-left-color: #6dd6c2; }
+
+.alerta-etiquetas { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.alerta-etiquetas:empty { display: none; }
+
+.alertas-aviso {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--nivel-naranja-texto);
+  background: rgba(244, 132, 95, 0.12);
+  border-radius: var(--radio-boton);
+  padding: 8px 12px; margin-bottom: 12px;
+}

@@ -1,0 +1,81 @@
+/* =================================================================
+   Archivo: src/components/FotoMascota/FotoMascota.css
+   Foto (o emoji) de la mascota. La forma se elige con la clase foto-<forma>.
+================================================================= */
+.foto-mascota-envoltorio {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  vertical-align: middle;
+}
+
+.foto-mascota {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(42, 143, 163, 0.1);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+  line-height: 1;
+}
+.foto-circulo { border-radius: 50%; }
+.foto-redondeado { border-radius: 22%; }
+.foto-cuadrado { border-radius: 4px; }
+
+.foto-mascota-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.foto-mascota-emoji { user-select: none; }
+
+/* El botón cubre todo el avatar: el área táctil es grande aunque la cámara sea pequeña. */
+.foto-mascota-editar {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.foto-mascota-editar:hover { background: rgba(0, 0, 0, 0.12); }
+.foto-mascota-editar:focus-visible {
+  outline: 3px solid var(--color-primario, #2a8fa3);
+  outline-offset: -3px;
+}
+.foto-mascota-camara {
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-primario, #2a8fa3);
+  color: #fff;
+  font-size: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.foto-mascota-quitar {
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--color-texto-suave, #5b6b73);
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.foto-mascota-quitar:hover { color: #c0392b; }
+
+.foto-mascota-input { display: none; }

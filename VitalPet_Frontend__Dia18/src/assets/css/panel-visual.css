@@ -1,0 +1,158 @@
+/* =================================================================
+   Archivo: src/assets/css/panel-visual.css
+   Pulido visual COMPARTIDO de todas las pantallas autenticadas
+   (dueño, veterinario y administrador). Se importa en MainLayout.tsx.
+
+   Reglas del archivo:
+   - Todo va bajo .main-wrap o .sidebar, así que nunca afecta a la
+     landing ni a las pantallas de acceso.
+   - Solo cambia apariencia (color, borde, sombra, espaciado). No toca
+     tamaños de texto ni alturas mínimas de legibilidad-movil.css.
+   - Colores desde tokens.css.
+================================================================= */
+
+/* ---------- Foco visible (teclado) ---------- */
+.main-wrap :is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-primario);
+    outline-offset: 2px;
+}
+
+.sidebar :is(a, button):focus-visible,
+.topbar-mobile button:focus-visible {
+    outline: 3px solid var(--color-acento-claro);
+    outline-offset: -3px;
+}
+
+/* Campos: anillo suave al enfocar (antes solo cambiaba el borde) */
+.main-wrap :is(.form-input, .campo input, .campo select, .campo textarea, .buscador input, select.filtro):focus {
+    outline: none;
+    border-color: var(--color-primario-fuerte);
+    box-shadow: 0 0 0 4px rgba(42, 143, 163, 0.18);
+}
+
+/* ---------- Contenido centrado en pantallas anchas ---------- */
+.main-wrap .body {
+    margin-inline: auto;
+}
+
+/* ---------- Encabezado de página ---------- */
+.main-wrap :is(.section-header, .sec-header) {
+    position: relative;
+    border-bottom: 0;
+    padding-bottom: 20px;
+}
+
+/* Trazo corto de acento + línea fina: reemplaza la línea gris plana */
+.main-wrap :is(.section-header, .sec-header)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--color-primario) 0,
+        var(--color-secundario) 72px,
+        rgba(26, 111, 168, 0.1) 72px
+    );
+}
+
+.main-wrap :is(.page-title, .sec-titulo) {
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Banner de la veterinaria (inicio del dueño): línea de pulso ---------- */
+.main-wrap .vet-banner {
+    position: relative;
+    overflow: hidden;
+}
+
+.main-wrap .vet-banner > * {
+    position: relative;
+    z-index: 1;
+}
+
+.main-wrap .vet-banner::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    width: 52%;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 80' preserveAspectRatio='none'%3E%3Cpath d='M0,40 H300 L316,40 L328,10 L346,70 L362,24 L372,40 H600' fill='none' stroke='white' stroke-opacity='0.22' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* ---------- Tarjetas: bordes y radios coherentes ---------- */
+.main-wrap :is(.stat, .cita-card, .form-card, .formulario-card, .mascota-card, .card) {
+    border: 1px solid rgba(26, 111, 168, 0.1);
+    border-radius: 18px;
+}
+
+.main-wrap :is(.cita-row, .cita-fila, .hist-fila) {
+    border: 1.5px solid rgba(26, 111, 168, 0.1);
+    border-radius: 16px;
+}
+
+/* La franja de la próxima cita se conserva (el borde de arriba la pisaba) */
+.main-wrap .cita-card {
+    border-left: 4px solid var(--color-primario);
+}
+
+/* La tarjeta de formulario ocupaba solo 560px y dejaba media pantalla vacía */
+.main-wrap .form-card {
+    max-width: 760px;
+}
+
+/* ---------- Citas: franja de color según el estado ---------- */
+.main-wrap :is(.cita-row, .cita-fila) {
+    border-left-width: 5px;
+}
+
+.main-wrap :is(.cita-row, .cita-fila):has(:is(.badge-estado, .chip).pendiente) {
+    border-left-color: var(--nivel-naranja);
+}
+
+.main-wrap :is(.cita-row, .cita-fila):has(:is(.badge-estado, .chip).confirmada) {
+    border-left-color: var(--color-primario);
+}
+
+.main-wrap :is(.cita-row, .cita-fila):has(:is(.badge-estado, .chip).completada) {
+    border-left-color: var(--nivel-verde);
+}
+
+.main-wrap :is(.cita-row, .cita-fila):has(:is(.badge-estado, .chip).cancelada) {
+    border-left-color: rgba(84, 93, 101, 0.45);
+}
+
+/* ---------- Botones: respuesta al pulsar ---------- */
+.main-wrap :is(.btn-guardar, .btn-enviar, .btn-nuevo, .btn-historial):active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* ---------- Modales ---------- */
+.main-wrap :is(.modal-bg, .modal-fondo),
+:is(.modal-bg, .modal-fondo) {
+    backdrop-filter: blur(3px);
+}
+
+:is(.modal-dueno, .modal-caja) {
+    border-radius: 22px;
+}
+
+/* ---------- Menú lateral: indicador del enlace activo más claro ---------- */
+.sidebar .logo-icon {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .main-wrap *,
+    .sidebar * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

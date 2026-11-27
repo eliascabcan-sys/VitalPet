@@ -1,0 +1,319 @@
+/* =================================================================
+   Archivo: src/components/NavBar/NavBar.css
+   ÚNICO lugar con estilos del menú (lateral + barra inferior).
+   Breakpoints del proyecto: 1024px y 640px (ver tokens.css).
+     · >1024px  menú lateral completo
+     · ≤1024px  menú lateral compacto (solo iconos)
+     · ≤640px   menú deslizable + barra inferior de accesos
+================================================================= */
+.sidebar {
+  width: var(--sidebar-ancho);
+  /* Alto = pantalla: la lista de enlaces hace scroll y el perfil siempre se ve */
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-nav);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  transition: var(--transicion);
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 22px 18px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-acento);
+  border-radius: var(--radio-boton);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.logo-name { font-size: 16px; font-weight: 700; color: #fff; }
+.logo-sub { font-size: 12px; color: var(--texto-sobre-nav); letter-spacing: 0.04em; }
+
+.sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+/* Barra de desplazamiento del menú: fina y en tonos azules */
+.sidebar-nav {
+  scrollbar-width: thin;                                   /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;   /* Firefox */
+}
+.sidebar-nav::-webkit-scrollbar { width: 6px; }            /* Chrome, Edge, Safari */
+.sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radio-boton);
+  color: var(--texto-sobre-nav);
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: var(--transicion);
+}
+.nav-item:hover { background: rgba(255, 255, 255, 0.08); color: #fff; }
+.nav-item.active {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+  font-weight: 600;
+  border-left: 3px solid var(--color-acento);
+  padding-left: 9px;
+}
+.nav-item i { font-size: 19px; width: 20px; text-align: center; flex-shrink: 0; }
+
+.sidebar-footer {
+  padding: 14px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-footer-perfil {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 6px;
+  border-radius: 8px;
+  transition: var(--transicion);
+}
+.sidebar-footer-perfil:hover { background: rgba(255, 255, 255, 0.1); }
+
+.avatar-side {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.user-textos { min-width: 0; }
+.user-name-side {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 110px;
+}
+.user-role-side { font-size: 12px; color: var(--texto-destacado-sobre-nav); }
+
+.btn-logout {
+  background: transparent;
+  border: none;
+  color: var(--texto-sobre-nav);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+  flex-shrink: 0;
+  font-size: 18px;
+  transition: var(--transicion);
+}
+.btn-logout:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
+
+.sidebar-overlay { display: none; }
+.bottom-nav { display: none; }
+
+/* ---------- Tablet: menú compacto (solo iconos) ---------- */
+@media (max-width: 1024px) {
+  .sidebar { width: var(--sidebar-ancho-compacto); }
+
+  .sidebar-logo { justify-content: center; padding: 18px 8px 14px; }
+  .logo-textos,
+  .nav-label,
+  .user-textos { display: none; }
+
+  .sidebar-nav { padding: 10px 8px; align-items: stretch; }
+  .nav-item { justify-content: center; padding: 11px 0; }
+  .nav-item.active { padding-left: 0; }
+
+  .sidebar-footer { flex-direction: column; padding: 12px 8px; }
+  .sidebar-footer-perfil { flex: none; justify-content: center; padding: 4px; }
+}
+
+/* ---------- Móvil: menú deslizable + barra inferior ---------- */
+@media (max-width: 640px) {
+  /* El menú vuelve a mostrarse completo, pero escondido a la izquierda */
+  .sidebar {
+    width: min(260px, 85vw);
+    transform: translateX(-100%);
+  }
+  .sidebar.open { transform: translateX(0); box-shadow: var(--sombra-fuerte); }
+
+  .sidebar-logo { justify-content: flex-start; padding: 22px 18px 18px; }
+  .logo-textos,
+  .nav-label,
+  .user-textos { display: block; }
+  .nav-label { display: inline; }
+
+  .sidebar-nav { padding: 14px 10px; }
+  .nav-item { justify-content: flex-start; padding: 12px; }
+  .nav-item.active { padding-left: 9px; }
+
+  .sidebar-footer { flex-direction: row; padding: 14px 12px; }
+  .sidebar-footer-perfil { flex: 1; justify-content: flex-start; padding: 6px; }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 19;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    height: calc(var(--barra-inferior-alto) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--color-nav);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+  }
+  .bottom-nav-item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    border-top: 3px solid transparent;
+    color: var(--texto-sobre-nav);
+    font-family: var(--fuente);
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transicion);
+  }
+  .bottom-nav-item i { font-size: 22px; }
+  .bottom-nav-item span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bottom-nav-item.active { color: #fff; font-weight: 700; border-top-color: var(--color-acento); }
+}
+
+/* Selector de vista Clínico / Gestión (veterinario y administrador) */
+.vista-switch {
+  display: flex;
+  gap: 4px;
+  margin: 12px 10px 0;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: var(--radio-boton);
+}
+.vista-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: var(--radio-boton);
+  background: transparent;
+  color: var(--texto-sobre-nav);
+  font-size: 13px;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+.vista-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+.vista-btn.active { background: var(--color-acento); color: #fff; font-weight: 600; }
+.vista-btn i { font-size: 17px; }
+
+/* Tablet (solo iconos): apilar el selector */
+@media (max-width: 1024px) and (min-width: 641px) {
+  .vista-switch { flex-direction: column; margin: 12px 6px 0; }
+  .vista-btn .nav-label { display: none; }
+}
+
+
+/* ---------- Grupos del menú (menú ordenado por tareas) ---------- */
+.nav-grupo { display: flex; flex-direction: column; gap: 2px; }
+.nav-grupo + .nav-grupo { margin-top: 14px; }
+
+.nav-seccion {
+  padding: 6px 12px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-sobre-nav);
+  opacity: 0.6;
+}
+
+/* Tablet (solo iconos): el título no cabe, así que se vuelve una línea fina que separa los grupos. */
+@media (max-width: 1024px) {
+  .nav-grupo + .nav-grupo { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+  .nav-seccion { display: none; }
+}
+
+/* Móvil: el menú deslizable vuelve a ser completo y los títulos se ven otra vez. */
+@media (max-width: 640px) {
+  .nav-seccion { display: block; }
+  .nav-grupo + .nav-grupo { margin-top: 14px; padding-top: 0; border-top: none; }
+}
+
+/* ---------- Globito de alertas pendientes (menú del veterinario/admin) ---------- */
+.nav-item { position: relative; }
+.nav-badge {
+  margin-left: auto; min-width: 20px; padding: 1px 7px; border-radius: 20px; text-align: center;
+  font-size: 11px; font-weight: 700; line-height: 1.5; color: #fff; background: var(--color-acento-fuerte);
+}
+.nav-badge.grave { background: var(--nivel-rojo); }
+
+/* Tablet (solo iconos): el número no cabe, queda un puntito en la esquina del icono. */
+@media (max-width: 1024px) {
+  .nav-badge { position: absolute; top: 5px; right: 10px; min-width: 0; width: 9px; height: 9px; padding: 0; font-size: 0; }
+}
+/* Móvil: el menú deslizable vuelve a mostrar el número. */
+@media (max-width: 640px) {
+  .nav-badge { position: static; width: auto; height: auto; min-width: 20px; padding: 1px 7px; font-size: 11px; }
+}

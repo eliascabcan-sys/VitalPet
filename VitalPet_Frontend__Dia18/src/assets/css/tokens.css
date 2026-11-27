@@ -1,0 +1,79 @@
+/* =================================================================
+   Archivo: src/assets/css/tokens.css
+   FUENTE ÚNICA de variables de diseño de VitalPet.
+   Se importa PRIMERO en main.tsx (antes de global.css y demás).
+   No declarar :root en ningún otro archivo CSS.
+================================================================= */
+
+/* BREAKPOINTS (solo estos dos en todo el proyecto).
+   Las variables CSS no funcionan dentro de @media, por eso se documentan aquí:
+     móvil  : max-width: 640px   -> barra inferior + menú deslizable
+     tablet : max-width: 1024px  -> menú lateral compacto (solo iconos)
+     escritorio: más de 1024px   -> menú lateral completo */
+
+:root {
+  --sidebar-ancho: 248px;
+  --sidebar-ancho-compacto: 72px;
+  --barra-inferior-alto: 64px;
+  --tap-min: 44px; /* alto mínimo de cualquier botón o campo en móvil */
+
+  /* ---------- Colores del contrato ---------- */
+  --color-primario: #2a8fa3;
+  --color-acento: #f4845f;
+  --color-secundario: #6dd6c2;
+  --color-fondo: #f0f7fa;
+  --color-nav: #1a6fa8;
+  --color-nav-oscuro: #2a8fa3;
+  --color-texto: #2c2c2c;
+  --color-texto-claro: #ffffff;
+  --color-texto-gris: #6c757d;
+
+  /* ---------- Variantes accesibles (contraste WCAG AA >= 4.5:1) ----------
+     Los colores del contrato de arriba se conservan para fondos, bordes e iconos.
+     Para TEXTO pequeño o botones con texto blanco se usan estas variantes: */
+  --color-texto-suave: #545d65;      /* gris para texto sobre fondo claro: 6.2:1 (el gris del contrato daba 4.3:1) */
+  --color-primario-fuerte: #1b6b7d;  /* primario para texto/enlaces y fondo de botones con texto blanco: 6.1:1 */
+  --color-acento-fuerte: #b35330;    /* acento como fondo de botón con texto blanco: 5.0:1 (el acento puro daba 2.5:1) */
+  --texto-sobre-nav: #e3f0f9;        /* texto inactivo sobre --color-nav: 4.7:1 */
+  --color-acento-claro: #ffb59c;     /* acento para texto GRANDE (>=24 px) sobre azul oscuro: 3.2:1 */
+  --texto-destacado-sobre-nav: #c8f5ec; /* rol de usuario sobre --color-nav: 5.3:1 */
+
+
+  /* ---------- Superficies de los paneles (dueño, veterinario, administrador) ---------- */
+  --azul-profundo: #134a73;            /* fondo del pie y del final del menú lateral (igual al pie de la landing) */
+  --radio-grande: 20px;                /* tarjetas principales de los paneles */
+  --sombra-tarjeta: 0 10px 30px rgba(18, 70, 110, 0.08);
+  --borde-tarjeta: rgba(26, 111, 168, 0.1);
+  --fondo-suave: #eaf4f9;              /* encabezados de tabla, botones secundarios al pasar el mouse */
+  --velo-modal: rgba(8, 40, 68, 0.55); /* fondo oscuro de modales (mismo azul del login) */
+  /* ---------- Sombras, radios, fuente, transición ---------- */
+  --sombra-suave: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --sombra-media: 0 8px 28px rgba(0, 0, 0, 0.13);
+  --sombra-fuerte: 0 12px 40px rgba(0, 0, 0, 0.18);
+  --radio-tarjeta: 14px;
+  --radio-boton: 8px;
+  --fuente: 'Quicksand', sans-serif;
+  --transicion: all 0.28s ease;
+
+  /* ---------- Niveles de triaje (--nivel-*) ----------
+     solido = barras/puntos · fondo + texto = chips · borde = alertas */
+  --nivel-rojo: #a32d2d;
+  --nivel-rojo-fondo: #fceaea;
+  --nivel-rojo-texto: #a32d2d;
+
+  --nivel-naranja: #c2603a;
+  --nivel-naranja-fondo: rgba(244, 132, 95, 0.15);
+  --nivel-naranja-texto: #a44a26;
+
+  --nivel-amarillo: #b8942a;
+  --nivel-amarillo-fondo: rgba(184, 148, 42, 0.18);
+  --nivel-amarillo-texto: #7a6115;
+
+  --nivel-verde: #2a9e8a;
+  --nivel-verde-fondo: rgba(109, 214, 194, 0.2);
+  --nivel-verde-texto: #1a7a6a;
+
+  --nivel-azul: #2a6f9e;
+  --nivel-azul-fondo: rgba(42, 111, 158, 0.15);
+  --nivel-azul-texto: #1f5f8b;
+}

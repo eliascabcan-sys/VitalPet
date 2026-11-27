@@ -1,0 +1,66 @@
+/* =================================================================
+   Estilos extra de las pantallas del panel Administrador.
+   Complementa admin.css (que ya trae cards, modales, chips, botones).
+   ================================================================= */
+
+/* ── Pestañas ── */
+.adm-tabs {
+  display: flex; gap: 4px; margin-bottom: 16px;
+  border-bottom: 1.5px solid rgba(0,0,0,0.08); flex-wrap: wrap;
+}
+.adm-tab {
+  background: none; border: none; cursor: pointer;
+  padding: 9px 16px; margin-bottom: -1.5px;
+  font-family: var(--fuente); font-size: 13px; font-weight: 600;
+  color: var(--color-texto-suave);
+  border-bottom: 2.5px solid transparent;
+  transition: var(--transicion);
+}
+.adm-tab:hover { color: var(--color-nav); }
+.adm-tab.activa { color: var(--color-nav); border-bottom-color: var(--color-primario); }
+
+/* ── Tabla ── */
+.adm-tabla-wrap {
+  background: #fff; border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radio-tarjeta); overflow-x: auto;
+}
+.adm-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+.adm-tabla th {
+  text-align: left; padding: 11px 14px; white-space: nowrap;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--color-texto-suave); background: var(--color-fondo);
+  border-bottom: 1.5px solid rgba(0,0,0,0.08);
+}
+.adm-tabla td { padding: 11px 14px; border-bottom: 1px solid rgba(0,0,0,0.06); vertical-align: middle; }
+.adm-tabla tr:last-child td { border-bottom: none; }
+.adm-tabla tr.inactiva td { opacity: .55; }
+.adm-tabla tr.inactiva td:last-child { opacity: 1; }
+.adm-sub { font-size: 11px; color: var(--color-texto-suave); margin-top: 2px; }
+.adm-acciones { display: flex; gap: 6px; justify-content: flex-end; }
+.adm-num { text-align: right; white-space: nowrap; }
+
+/* ── Chips extra (los base están en admin.css) ── */
+.chip.activo   { background: rgba(109,214,194,0.2); color: #1a7a6a; }
+.chip.inactivo { background: rgba(180,178,169,0.2); color: #555; }
+.chip.pagada   { background: rgba(109,214,194,0.2); color: #1a7a6a; }
+.chip.verde    { background: rgba(109,214,194,0.2); color: #1a7a6a; }
+.chip.naranja  { background: rgba(244,132,95,0.15); color: var(--nivel-naranja-texto); }
+.chip.rojo     { background: #FCEBEB; color: #A32D2D; }
+.chip.receta   { background: rgba(163,45,45,0.08); color: #A32D2D; }
+.btn-ico.verde:hover { background: rgba(109,214,194,0.15); color: #1a7a6a; border-color: #2a9e8a; }
+
+/* ── Utilidades de formulario ── */
+.adm-check { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 12px; cursor: pointer; }
+.adm-check input { width: auto; }
+.adm-ayuda { font-size: 11px; color: var(--color-texto-suave); margin-top: 4px; }
+.adm-linea { display: grid; grid-template-columns: 1fr 70px 32px; gap: 8px; margin-bottom: 8px; align-items: center; }
+.adm-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 14px; padding: 10px 0 4px; border-top: 1px solid rgba(0,0,0,0.08); margin-top: 8px; }
+
+/* ── Filas de detalle (ventas, preguntas) ── */
+.adm-detalle { font-size: 12px; color: var(--color-texto-suave); display: flex; justify-content: space-between; padding: 3px 0; }
+.adm-pregunta {
+  display: flex; gap: 10px; align-items: flex-start; justify-content: space-between;
+  padding: 10px 12px; border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: var(--radio-boton); margin-bottom: 8px; font-size: 13px;
+}
+.adm-pregunta-meta { font-size: 11px; color: var(--color-texto-suave); margin-bottom: 3px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }

@@ -1,0 +1,31 @@
+/* =================================================================
+   Lista de citas del veterinario / administrador.
+   Reutiliza el bloque de fecha (.cita-fecha-bloque) y los botones .av-btn;
+   aquí solo va lo propio de esta pantalla (prefijo "vc-").
+================================================================= */
+.vc-grupo { margin-bottom: 22px; }
+.vc-grupo-titulo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--color-texto-suave); margin: 4px 0 10px;
+}
+.vc-grupo-titulo span {
+  font-size: 11px; padding: 1px 9px; border-radius: 20px; background: #e3e8ec; letter-spacing: 0;
+}
+
+.vc-fila { align-items: flex-start; }
+/* Ancho fijo: así los nombres arrancan en la misma columna sin importar si dice "Mañana" o "Tarde". */
+.vc-fila .cita-fecha-bloque { width: 68px; min-width: 68px; }
+.vc-fila.cancelada { opacity: 0.7; }
+.vc-especie { font-weight: 500; color: var(--color-texto-suave); }
+.vc-vet { font-size: 12px; margin-top: 4px; color: var(--color-texto-suave); }
+.vc-sin-vet { color: var(--nivel-naranja-texto); font-weight: 600; }
+
+.vc-lado { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
+.vc-acciones { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.av-btn.peligro:hover { border-color: var(--nivel-rojo); color: var(--nivel-rojo-texto); background: var(--nivel-rojo-fondo); }
+
+@media (max-width: 640px) {
+  .vc-lado { align-items: flex-start; width: 100%; }
+  .vc-acciones { justify-content: flex-start; }
+}
